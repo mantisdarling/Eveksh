@@ -71,7 +71,7 @@ My sessions are direct, focused, and immediately actionable. I won't waste your 
 
 function StarRating({ rating }: { rating: number; size?: number }) {
   return (
-    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#09090b', fontFamily: 'monospace' }}>
+    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fafafa', fontFamily: 'monospace' }}>
       {rating.toFixed(1)} / 5.0
     </span>
   );
@@ -91,7 +91,7 @@ export default async function ExpertProfilePage({
   return (
     <div style={{ minHeight: '100vh', background: '#09090b', color: '#fafafa' }}>
       {/* Background orbs */}
-      <div style={{ position: 'fixed', top: '-10%', right: '-10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'fixed', top: '-10%', right: '-10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(63,63,70,0.12) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none' }} />
 
       <Navbar locale={locale} />
 
@@ -104,12 +104,12 @@ export default async function ExpertProfilePage({
               {p?.avatarUrl ? (
                 <img src={p.avatarUrl} alt={expert.name} style={{ width: 100, height: 100, borderRadius: '50%', objectFit: 'cover' }} />
               ) : (
-                <div style={{ width: 100, height: 100, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', fontWeight: 900, color: '#fff' }}>
+                <div style={{ width: 100, height: 100, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', fontWeight: 900, color: '#fafafa' }}>
                   {expert.name.charAt(0)}
                 </div>
               )}
               {p?.isVerified && (
-                <div style={{ position: 'absolute', bottom: 2, right: 2, width: 26, height: 26, borderRadius: '50%', background: '#6366f1', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', border: '2px solid #09090b' }}>✓</div>
+                <div style={{ position: 'absolute', bottom: 2, right: 2, width: 26, height: 26, borderRadius: '50%', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', border: '2px solid #09090b', color: '#fafafa' }}>✓</div>
               )}
             </div>
 
@@ -117,7 +117,7 @@ export default async function ExpertProfilePage({
             <div style={{ flex: 1, minWidth: 240 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '0.35rem' }}>
                 <h1 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.03em', color: '#fafafa' }}>{expert.name}</h1>
-                {p?.isVerified && <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#818cf8', background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.3)', padding: '0.2rem 0.6rem', borderRadius: '9999px' }}>✓ VERIFIED</span>}
+                {p?.isVerified && <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#fafafa', background: '#27272a', border: '1px solid #3f3f46', padding: '0.2rem 0.6rem', borderRadius: '9999px' }}>✓ VERIFIED</span>}
               </div>
               <p style={{ color: '#a1a1aa', fontSize: '1rem', marginBottom: '0.75rem' }}>{p?.headline}</p>
 
@@ -130,7 +130,7 @@ export default async function ExpertProfilePage({
                   </div>
                 )}
                 <span style={{ color: '#3f3f46' }}>·</span>
-                <span style={{ fontSize: '0.875rem', color: '#71717a' }}>🕒 Usually responds within 1 hour</span>
+                <span style={{ fontSize: '0.875rem', color: '#71717a' }}>Usually responds within 1 hour</span>
               </div>
 
               {/* Skills */}

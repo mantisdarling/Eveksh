@@ -36,8 +36,8 @@ export default function SessionPage() {
   if (ended) {
     return (
       <div style={{ minHeight: '100vh', background: '#09090b', color: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '1.5rem', textAlign: 'center', padding: '2rem' }}>
-        <div style={{ fontSize: '4rem' }}>✅</div>
-        <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Session <span className="gradient-text">Complete!</span></h1>
+        <div style={{ fontSize: '2rem', marginBottom: '1rem', color: '#a1a1aa' }}>Done</div>
+        <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Session Complete</h1>
         <p style={{ color: '#71717a', maxWidth: 400 }}>Great session! Your payment has been released to your mentor. Please leave a review to help other learners.</p>
         <a href={`/${locale}/dashboard`} className="btn-primary" style={{ padding: '0.85rem 2rem', textDecoration: 'none' }}>Leave a Review →</a>
       </div>
@@ -52,7 +52,7 @@ export default function SessionPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div className="glass-panel" style={{ borderRadius: '1.25rem', aspectRatio: '16/9', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', position: 'relative', overflow: 'hidden', background: 'rgba(9,9,11,0.9)' }}>
             {/* Gradient bg */}
-            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 30%, rgba(99,102,241,0.08), transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(168,85,247,0.06), transparent 60%)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 30%, rgba(63,63,70,0.15), transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(39,39,42,0.12), transparent 60%)' }} />
             <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
               <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
                 <svg className="w-12 h-12 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,23 +68,23 @@ export default function SessionPage() {
               </div>
             </div>
             {/* Timer */}
-            <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(0,0,0,0.6)', borderRadius: '0.5rem', padding: '0.4rem 0.8rem', fontSize: '0.85rem', fontWeight: 600, color: '#34d399' }}>
+            <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(0,0,0,0.6)', borderRadius: '0.5rem', padding: '0.4rem 0.8rem', fontSize: '0.85rem', fontWeight: 600, color: '#a1a1aa' }}>
               ● LIVE · 00:12:34
             </div>
           </div>
-          <button onClick={endSession} disabled={ending} style={{ background: 'linear-gradient(135deg, #ef4444, #dc2626)', color: '#fff', fontWeight: 700, padding: '0.85rem', borderRadius: '0.875rem', border: 'none', cursor: 'pointer', fontSize: '0.95rem', fontFamily: 'inherit', transition: 'all 0.2s' }}>
-            {ending ? 'Ending session...' : '⏹ End Session & Release Payment'}
+          <button onClick={endSession} disabled={ending} style={{ background: '#18181b', color: '#fafafa', fontWeight: 700, padding: '0.85rem', borderRadius: '0.875rem', border: '1px solid #3f3f46', cursor: 'pointer', fontSize: '0.95rem', fontFamily: 'inherit', transition: 'all 0.2s' }}>
+            {ending ? 'Ending session...' : 'End Session & Release Payment'}
           </button>
         </div>
 
         {/* Chat sidebar */}
         <div className="glass-panel" style={{ borderRadius: '1.25rem', display: 'flex', flexDirection: 'column', height: '75vh' }}>
-          <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', fontWeight: 700, fontSize: '0.95rem' }}>💬 Session Chat</div>
+          <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', fontWeight: 700, fontSize: '0.95rem' }}>Session Chat</div>
           <div style={{ flex: 1, overflowY: 'auto', padding: '1rem 1.25rem', display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
             {messages.map(msg => (
               <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.from === 'Me' ? 'flex-end' : 'flex-start', gap: '0.2rem' }}>
                 <span style={{ fontSize: '0.72rem', color: '#52525b' }}>{msg.from} · {msg.time}</span>
-                <div style={{ maxWidth: '85%', padding: '0.6rem 0.9rem', borderRadius: msg.from === 'Me' ? '1rem 1rem 0.25rem 1rem' : '1rem 1rem 1rem 0.25rem', background: msg.from === 'Me' ? 'linear-gradient(135deg,#6366f1,#4f46e5)' : 'rgba(39,39,42,0.8)', color: '#fafafa', fontSize: '0.875rem', lineHeight: 1.5 }}>
+                <div style={{ maxWidth: '85%', padding: '0.6rem 0.9rem', borderRadius: msg.from === 'Me' ? '1rem 1rem 0.25rem 1rem' : '1rem 1rem 1rem 0.25rem', background: msg.from === 'Me' ? '#09090b' : 'rgba(39,39,42,0.8)', color: '#fafafa', fontSize: '0.875rem', lineHeight: 1.5 }}>
                   {msg.text}
                 </div>
               </div>

@@ -17,9 +17,9 @@ const CARD_ELEMENT_OPTIONS = {
       fontFamily: 'Inter, system-ui, sans-serif',
       fontSize: '15px',
       '::placeholder': { color: '#52525b' },
-      iconColor: '#818cf8',
+      iconColor: '#a1a1aa',
     },
-    invalid: { color: '#f87171', iconColor: '#f87171' },
+    invalid: { color: '#e4e4e7', iconColor: '#e4e4e7' },
   },
 };
 
@@ -92,17 +92,17 @@ function CheckoutForm({ amount, expertId, locale }: { amount: number; expertId: 
         </div>
       </div>
 
-      <div style={{ background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '0.75rem', padding: '0.875rem 1rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+      <div style={{ background: '#18181b', border: '1px solid #27272a', borderRadius: '0.75rem', padding: '0.875rem 1rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
         <div>
-          <p style={{ fontSize: '0.8rem', color: '#34d399', fontWeight: 600, marginBottom: '0.15rem' }}>Escrow Protected</p>
-          <p style={{ fontSize: '0.75rem', color: '#71717a', lineHeight: 1.5 }}>
+          <p style={{ fontSize: '0.8rem', color: '#fafafa', fontWeight: 600, marginBottom: '0.15rem' }}>Escrow Protected</p>
+          <p style={{ fontSize: '0.75rem', color: '#a1a1aa', lineHeight: 1.5 }}>
             Funds are held safely until your session completes. Use test card: 4242 4242 4242 4242.
           </p>
         </div>
       </div>
 
       {error && (
-        <div style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '0.75rem', padding: '0.75rem 1rem', color: '#f87171', fontSize: '0.85rem' }}>
+        <div style={{ background: '#18181b', border: '1px solid #3f3f46', borderRadius: '0.75rem', padding: '0.75rem 1rem', color: '#f4f4f5', fontSize: '0.85rem' }}>
           {error}
         </div>
       )}

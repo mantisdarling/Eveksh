@@ -22,14 +22,13 @@ const ADMIN_STATS = [
 const roleBadge = (role: string) => ({
   display: 'inline-block' as const,
   padding: '0.2rem 0.6rem',
-  borderRadius: '9999px',
+  borderRadius: '0.375rem',
   fontSize: '0.72rem',
   fontWeight: 600,
-  ...(role === 'EXPERT'
-    ? { background: 'rgba(99,102,241,0.15)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.3)' }
-    : role === 'ADMIN'
-    ? { background: 'rgba(244,114,182,0.15)', color: '#f472b6', border: '1px solid rgba(244,114,182,0.3)' }
-    : { background: 'rgba(161,161,170,0.1)', color: '#a1a1aa', border: '1px solid rgba(161,161,170,0.2)' }),
+  fontFamily: 'monospace',
+  background: role === 'ADMIN' ? '#27272a' : role === 'EXPERT' ? '#18181b' : '#18181b',
+  color: '#f4f4f5',
+  border: '1px solid #3f3f46',
 });
 
 export default async function AdminPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -43,7 +42,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
         {/* Header */}
         <div className="animate-fade-in-up" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Admin <span className="gradient-text">Dashboard</span></h1>
+            <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Admin Dashboard</h1>
             <p style={{ color: '#71717a', marginTop: '0.4rem' }}>Platform management and analytics overview.</p>
           </div>
           <span style={{ background: '#f4f4f5', border: '1px solid #e4e4e7', color: '#71717a', padding: '0.35rem 0.85rem', borderRadius: '0.5rem', fontSize: '0.75rem', fontWeight: 600, fontFamily: 'monospace' }}>
@@ -57,7 +56,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
             <div key={s.label} className="glass-panel" style={{ borderRadius: '1rem', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               <p style={{ fontSize: '0.75rem', color: '#71717a' }}>{s.label}</p>
               <p style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fafafa', lineHeight: 1 }}>{s.value}</p>
-              <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 600 }}>{s.delta} this month</span>
+              <span style={{ fontSize: '0.72rem', color: '#a1a1aa', fontWeight: 500 }}>{s.delta} this month</span>
             </div>
           ))}
         </div>
@@ -85,7 +84,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
                   >
                     <td style={{ padding: '1rem 1.5rem' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.9rem', color: '#fff', flexShrink: 0 }}>{u.name.charAt(0)}</div>
+                        <div style={{ width: 36, height: 36, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.9rem', color: '#f4f4f5', flexShrink: 0 }}>{u.name.charAt(0)}</div>
                         <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#fafafa' }}>{u.name}</span>
                       </div>
                     </td>

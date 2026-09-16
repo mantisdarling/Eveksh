@@ -44,13 +44,13 @@ export default function ProfilePage() {
       <Navbar locale={locale} />
       <main style={{ maxWidth: 760, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
         <div className="animate-fade-in-up" style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Edit <span className="gradient-text">Profile</span></h1>
+          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Edit Profile</h1>
           <p style={{ color: '#71717a', marginTop: '0.4rem' }}>How the world sees you on EVEKSH.</p>
         </div>
 
         {/* Avatar */}
         <div className="glass-panel animate-fade-in-up-delay-1" style={{ borderRadius: '1.25rem', padding: '2rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 700, color: '#fff', flexShrink: 0 }}>M</div>
+          <div style={{ width: 80, height: 80, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 700, color: '#fafafa', flexShrink: 0 }}>M</div>
           <div>
             <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Profile Photo</p>
             <p style={{ color: '#71717a', fontSize: '0.85rem', marginBottom: '0.75rem' }}>Upload a professional photo to build trust.</p>
@@ -72,7 +72,7 @@ export default function ProfilePage() {
               <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a1a1aa', marginBottom: '0.75rem' }}>Skills</label>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {SKILLS_OPTIONS.map(s => (
-                  <button key={s} type="button" onClick={() => toggleSkill(s)} style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', border: '1px solid', fontSize: '0.8rem', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s', ...(selectedSkills.includes(s) ? { background: 'rgba(99,102,241,0.2)', borderColor: '#6366f1', color: '#818cf8' } : { background: 'transparent', borderColor: 'rgba(255,255,255,0.1)', color: '#71717a' }) }}>
+                  <button key={s} type="button" onClick={() => toggleSkill(s)} style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', border: '1px solid', fontSize: '0.8rem', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s', ...(selectedSkills.includes(s) ? { background: '#09090b', borderColor: '#09090b', color: '#ffffff' } : { background: 'transparent', borderColor: 'rgba(255,255,255,0.1)', color: '#71717a' }) }}>
                     {s}
                   </button>
                 ))}
@@ -83,8 +83,8 @@ export default function ProfilePage() {
               <input className="input-base" type="number" value={hourlyRate} onChange={e => setHourlyRate(e.target.value)} placeholder="e.g. 150" min={10} max={2000} style={{ maxWidth: 200 }} />
             </div>
 
-            {error && <p style={{ color: '#f87171', fontSize: '0.85rem' }}>{error}</p>}
-            {saved && <p style={{ color: '#34d399', fontSize: '0.85rem' }}>✓ Profile saved successfully!</p>}
+            {error && <p style={{ color: '#a1a1aa', fontSize: '0.85rem' }}>{error}</p>}
+            {saved && <p style={{ color: '#a1a1aa', fontSize: '0.85rem' }}>Profile saved successfully</p>}
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <button type="submit" disabled={saving} className="btn-primary" style={{ padding: '0.8rem 2rem' }}>

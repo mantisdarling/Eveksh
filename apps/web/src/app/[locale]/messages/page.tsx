@@ -46,14 +46,14 @@ export default function MessagesPage() {
           {/* Sidebar */}
           <div className="glass-panel" style={{ borderRadius: '1.25rem', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', fontWeight: 700, fontSize: '1rem' }}>
-              💬 Messages
+              Messages
             </div>
             <div style={{ overflowY: 'auto', flex: 1 }}>
               {CONVERSATIONS.map(c => (
-                <div key={c.id} onClick={() => setActiveConvo(c.id)} style={{ padding: '1rem 1.25rem', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'all 0.15s', background: activeConvo === c.id ? 'rgba(99,102,241,0.1)' : 'transparent', display: 'flex', gap: '0.875rem', alignItems: 'center' }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#fff', flexShrink: 0, position: 'relative' }}>
+                <div key={c.id} onClick={() => setActiveConvo(c.id)} style={{ padding: '1rem 1.25rem', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'all 0.15s', background: activeConvo === c.id ? 'rgba(255,255,255,0.06)' : 'transparent', display: 'flex', gap: '0.875rem', alignItems: 'center' }}>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#fff', flexShrink: 0, position: 'relative' }}>
                     {c.name.charAt(0)}
-                    {c.unread > 0 && <span style={{ position: 'absolute', top: -2, right: -2, width: 16, height: 16, borderRadius: '50%', background: '#6366f1', fontSize: '0.6rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#fff' }}>{c.unread}</span>}
+                    {c.unread > 0 && <span style={{ position: 'absolute', top: -2, right: -2, width: 16, height: 16, borderRadius: '50%', background: '#09090b', fontSize: '0.6rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#fff' }}>{c.unread}</span>}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
@@ -71,7 +71,7 @@ export default function MessagesPage() {
           <div className="glass-panel" style={{ borderRadius: '1.25rem', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             {/* Header */}
             <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#fff' }}>{activeConvoData?.name.charAt(0)}</div>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#fff' }}>{activeConvoData?.name.charAt(0)}</div>
               <div>
                 <p style={{ fontWeight: 700, fontSize: '0.95rem' }}>{activeConvoData?.name}</p>
                 <p style={{ color: '#71717a', fontSize: '0.78rem' }}>{activeConvoData?.headline}</p>
@@ -86,7 +86,7 @@ export default function MessagesPage() {
               {chatHistory.map((msg: any, i: number) => (
                 <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.from === 'Me' ? 'flex-end' : 'flex-start', gap: '0.2rem' }}>
                   <span style={{ fontSize: '0.72rem', color: '#52525b' }}>{msg.from} · {msg.time}</span>
-                  <div style={{ maxWidth: '70%', padding: '0.7rem 1rem', borderRadius: msg.from === 'Me' ? '1rem 1rem 0.25rem 1rem' : '1rem 1rem 1rem 0.25rem', background: msg.from === 'Me' ? 'linear-gradient(135deg,#6366f1,#4f46e5)' : 'rgba(39,39,42,0.8)', color: '#fafafa', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                  <div style={{ maxWidth: '70%', padding: '0.7rem 1rem', borderRadius: msg.from === 'Me' ? '1rem 1rem 0.25rem 1rem' : '1rem 1rem 1rem 0.25rem', background: msg.from === 'Me' ? '#09090b' : 'rgba(39,39,42,0.8)', color: '#fafafa', fontSize: '0.9rem', lineHeight: 1.6 }}>
                     {msg.text}
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export default function MessagesPage() {
             </div>
 
             {/* Socket.io badge */}
-            <div style={{ padding: '0.5rem 1.5rem', background: 'rgba(99,102,241,0.06)', borderTop: '1px solid rgba(99,102,241,0.1)', borderBottom: '1px solid rgba(99,102,241,0.1)', fontSize: '0.75rem', color: '#6366f1', textAlign: 'center' }}>
+            <div style={{ padding: '0.5rem 1.5rem', background: 'rgba(255,255,255,0.03)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', fontSize: '0.75rem', color: '#71717a', textAlign: 'center' }}>
               Real-time messaging powered by Socket.io
             </div>
 

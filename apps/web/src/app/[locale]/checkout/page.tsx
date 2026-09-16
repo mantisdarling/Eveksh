@@ -16,7 +16,7 @@ export default function CheckoutPage() {
       <Navbar locale={locale} />
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
         <div className="animate-fade-in-up" style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Secure <span className="gradient-text">Checkout</span></h1>
+          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Secure Checkout</h1>
           <p style={{ color: '#71717a', marginTop: '0.4rem' }}>Your payment is held in escrow — released only after your session ends.</p>
         </div>
 
@@ -33,13 +33,13 @@ export default function CheckoutPage() {
               ))}
               <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0' }}>
                 <span style={{ fontWeight: 700, fontSize: '1rem' }}>Total</span>
-                <span className="gradient-text" style={{ fontWeight: 800, fontSize: '1.2rem' }}>$150.00</span>
+                <span style={{ fontWeight: 800, fontSize: '1.2rem', color: '#fafafa' }}>$150.00</span>
               </div>
             </div>
 
-            <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'rgba(99,102,241,0.08)', borderRadius: '0.875rem', border: '1px solid rgba(99,102,241,0.2)' }}>
-              <p style={{ fontSize: '0.8rem', color: '#818cf8', fontWeight: 500, marginBottom: '0.25rem' }}>Escrow Protection</p>
-              <p style={{ fontSize: '0.78rem', color: '#71717a', lineHeight: 1.6 }}>Your $150 is held securely until your session ends. If your mentor doesn't show up, you get a full refund.</p>
+            <div style={{ marginTop: '1.5rem', padding: '1rem', background: '#18181b', borderRadius: '0.875rem', border: '1px solid #27272a' }}>
+              <p style={{ fontSize: '0.8rem', color: '#fafafa', fontWeight: 500, marginBottom: '0.25rem' }}>Escrow Protection</p>
+              <p style={{ fontSize: '0.78rem', color: '#a1a1aa', lineHeight: 1.6 }}>Your $150 is held securely until your session ends. If your mentor doesn't show up, you get a full refund.</p>
             </div>
           </div>
 

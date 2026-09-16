@@ -19,7 +19,7 @@ const categoryData = [
   { category: 'Finance', experts: 45, sessions: 130 },
 ];
 
-const CHART_COLORS = { brand: '#6366f1', purple: '#a855f7', pink: '#f472b6', green: '#10b981' };
+const CHART_COLORS = { brand: '#e4e4e7', purple: '#71717a', pink: '#a1a1aa', green: '#52525b' };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload?.length) {

@@ -21,7 +21,7 @@ export default function AppointmentsPage() {
 
   const tabStyle = (t: Tab) => ({
     padding: '0.5rem 1.25rem', borderRadius: '0.6rem', border: 'none', cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, fontFamily: 'inherit', transition: 'all 0.2s',
-    ...(tab === t ? { background: 'linear-gradient(135deg,#6366f1,#4f46e5)', color: '#fff' } : { background: 'transparent', color: '#71717a' }),
+    ...(tab === t ? { background: '#09090b', color: '#ffffff' } : { background: 'transparent', color: '#71717a' }),
   });
 
   return (
@@ -29,7 +29,7 @@ export default function AppointmentsPage() {
       <Navbar locale={locale} />
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
         <div className="animate-fade-in-up" style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>My <span className="gradient-text">Appointments</span></h1>
+          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>My Appointments</h1>
           <p style={{ color: '#71717a', marginTop: '0.4rem' }}>Manage your upcoming and past mentorship sessions.</p>
         </div>
 
@@ -47,7 +47,7 @@ export default function AppointmentsPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {MOCK_UPCOMING.map(s => (
               <div key={s.id} className="glass-panel card-hover" style={{ borderRadius: '1.25rem', padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1.2rem', color: '#fff', flexShrink: 0 }}>{s.expert.charAt(0)}</div>
+                <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1.2rem', color: '#fff', flexShrink: 0 }}>{s.expert.charAt(0)}</div>
                 <div style={{ flex: 1 }}>
                   <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.15rem' }}>{s.expert}</p>
                   <p style={{ color: '#71717a', fontSize: '0.8rem', marginBottom: '0.5rem' }}>{s.headline}</p>
@@ -57,7 +57,7 @@ export default function AppointmentsPage() {
                 </div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                   <p style={{ fontWeight: 700, color: '#fafafa', marginBottom: '0.15rem' }}>{s.day}</p>
-                  <p style={{ color: '#818cf8', fontSize: '0.875rem', marginBottom: '0.5rem' }}>{s.time}</p>
+                  <p style={{ color: '#a1a1aa', fontSize: '0.875rem', marginBottom: '0.5rem' }}>{s.time}</p>
                   <span style={{ fontSize: '0.8rem', color: '#71717a' }}>{s.rate}</span>
                 </div>
                 <a href={`/${locale}/session`} className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.82rem', textDecoration: 'none', flexShrink: 0 }}>Join →</a>
@@ -90,7 +90,7 @@ export default function AppointmentsPage() {
 
         {tab === 'canceled' && (
           <div className="glass-panel" style={{ borderRadius: '1.25rem', padding: '3rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🗑️</div>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem', color: '#3f3f46' }}>—</div>
             <h3 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>No Canceled Sessions</h3>
             <p style={{ color: '#71717a', fontSize: '0.875rem', marginBottom: '1.5rem' }}>You haven&apos;t canceled any sessions.</p>
             <a href={`/${locale}/dashboard`} className="btn-primary" style={{ padding: '0.75rem 1.75rem', textDecoration: 'none' }}>Find a Mentor →</a>
