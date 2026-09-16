@@ -89,11 +89,8 @@ function HomePageClient({ locale }: { locale: string }) {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-[#09090b] relative overflow-hidden">
+    <div className="min-h-screen bg-white text-[#09090b] relative">
       <Navbar locale={locale} />
-
-      {/* ── Midday Subtle Architectural Background Grid ── */}
-      <div className="absolute inset-0 bg-grid bg-radial-fade pointer-events-none opacity-60 h-[1000px]" />
 
       {/* ── Hero Section ── */}
       <section className="relative z-10 pt-32 sm:pt-40 pb-20 px-4 sm:px-6 max-w-5xl mx-auto text-center">

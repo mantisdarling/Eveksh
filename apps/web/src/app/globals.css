@@ -52,18 +52,7 @@ body {
 ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
 
-/* ─── Midday Light Grid & Architectural Lines ────── */
-.bg-grid {
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 36px 36px;
-}
-
-.bg-radial-fade {
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-}
+/* ─── Clean Pure White Theme ─────────────────────── */
 
 /* ─── Midday Light Bento Cards ───────────────────── */
 .bento-card {

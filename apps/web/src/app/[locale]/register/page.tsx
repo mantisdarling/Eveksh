@@ -51,9 +51,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#fafafa] text-[#09090b] flex flex-col justify-between items-center p-4 sm:p-6 relative overflow-hidden">
-      {/* ── Midday Subtle Light Architectural Grid ── */}
-      <div className="absolute inset-0 bg-grid bg-radial-fade pointer-events-none opacity-60" />
+    <div className="min-h-screen w-full bg-white text-[#09090b] flex flex-col justify-between items-center p-4 sm:p-6 relative">
 
       {/* ── Top Header Brand (Light) ── */}
       <header className="relative z-10 w-full max-w-5xl flex items-center justify-between py-4">
