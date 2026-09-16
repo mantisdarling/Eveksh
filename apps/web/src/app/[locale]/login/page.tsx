@@ -59,12 +59,20 @@ export default function LoginPage() {
           <span className="font-extrabold text-sm tracking-widest text-zinc-950 uppercase">EVEKSH</span>
           <span className="status-dot" />
         </Link>
-        <Link
-          href={`/${locale}/register`}
-          className="text-xs font-mono text-zinc-500 hover:text-black transition-colors"
-        >
-          Need an account? <span className="text-zinc-950 font-semibold underline underline-offset-4">Sign up →</span>
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            href={`/${locale}/dashboard`}
+            className="text-xs font-mono text-zinc-600 hover:text-black transition-colors"
+          >
+            Browse mentors →
+          </Link>
+          <Link
+            href={`/${locale}/register`}
+            className="text-xs font-mono text-zinc-500 hover:text-black transition-colors"
+          >
+            Need an account? <span className="text-zinc-950 font-semibold underline underline-offset-4">Sign up</span>
+          </Link>
+        </div>
       </header>
 
       {/* ── Midday Light Authentication Card ── */}
@@ -162,6 +170,16 @@ export default function LoginPage() {
             >
               {loading ? 'Signing in...' : 'Sign in to EVEKSH'}
             </button>
+
+            {/* Continue Without Signing In Option */}
+            <div className="pt-2">
+              <Link
+                href={`/${locale}/dashboard`}
+                className="btn-midday-secondary w-full py-2.5 rounded-xl text-xs font-medium text-center text-zinc-700 hover:text-black border border-zinc-200 block shadow-sm"
+              >
+                Continue without signing in →
+              </Link>
+            </div>
           </form>
         </div>
 

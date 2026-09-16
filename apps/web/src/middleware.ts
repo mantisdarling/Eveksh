@@ -13,7 +13,7 @@ export const config = {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const protectedPaths = ['/dashboard', '/messages', '/appointments', '/admin', '/profile', '/book', '/checkout', '/session'];
+  const protectedPaths = ['/messages', '/appointments', '/admin', '/profile', '/book', '/checkout', '/session'];
   const isProtected = protectedPaths.some((path) => pathname.includes(path));
 
   if (isProtected) {
