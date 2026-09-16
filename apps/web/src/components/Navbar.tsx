@@ -42,13 +42,13 @@ export function Navbar({ locale }: NavbarProps) {
           alignItems: 'center',
           justifyContent: 'space-between',
           transition: 'all 0.2s ease',
-          background: scrolled ? 'rgba(9, 9, 11, 0.92)' : 'rgba(9, 9, 11, 0.7)',
+          background: scrolled ? 'rgba(255, 255, 255, 0.94)' : 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          borderBottom: '1px solid #e4e4e7',
         }}
       >
-        {/* Logo / Wordmark */}
+        {/* Wordmark */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
           <Link href={`/${locale}`} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span
@@ -56,7 +56,7 @@ export function Navbar({ locale }: NavbarProps) {
                 fontSize: '1.05rem',
                 fontWeight: 800,
                 letterSpacing: '0.12em',
-                color: '#ffffff',
+                color: '#09090b',
                 textTransform: 'uppercase',
               }}
             >
@@ -65,7 +65,7 @@ export function Navbar({ locale }: NavbarProps) {
             <span className="status-dot" style={{ marginLeft: 2 }} />
           </Link>
 
-          {/* Desktop Links (Midday Minimalist Pills) */}
+          {/* Desktop Nav Links */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} className="desktop-nav">
             {NAV_LINKS.map(({ href, label }) => (
               <Link
@@ -78,8 +78,8 @@ export function Navbar({ locale }: NavbarProps) {
                   fontWeight: 500,
                   textDecoration: 'none',
                   transition: 'all 0.15s ease',
-                  color: isActive(href) ? '#ffffff' : '#8e8e93',
-                  background: isActive(href) ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                  color: isActive(href) ? '#09090b' : '#71717a',
+                  background: isActive(href) ? '#f4f4f5' : 'transparent',
                 }}
               >
                 {label}
@@ -115,9 +115,9 @@ export function Navbar({ locale }: NavbarProps) {
               height: 36,
               borderRadius: '0.5rem',
               background: 'transparent',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
+              border: '1px solid #e4e4e7',
               cursor: 'pointer',
-              color: '#fafafa',
+              color: '#09090b',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '1rem',
@@ -131,7 +131,7 @@ export function Navbar({ locale }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer (Light) */}
       {menuOpen && (
         <div
           style={{
@@ -140,9 +140,9 @@ export function Navbar({ locale }: NavbarProps) {
             left: 0,
             right: 0,
             zIndex: 99,
-            background: 'rgba(9, 9, 11, 0.98)',
+            background: 'rgba(255, 255, 255, 0.98)',
             backdropFilter: 'blur(20px)',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+            borderBottom: '1px solid #e4e4e7',
             padding: '1.25rem 1.5rem',
             display: 'flex',
             flexDirection: 'column',
@@ -160,14 +160,14 @@ export function Navbar({ locale }: NavbarProps) {
                 fontSize: '0.9rem',
                 fontWeight: 500,
                 textDecoration: 'none',
-                color: isActive(href) ? '#ffffff' : '#8e8e93',
-                background: isActive(href) ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+                color: isActive(href) ? '#09090b' : '#71717a',
+                background: isActive(href) ? '#f4f4f5' : 'transparent',
               }}
             >
               {label}
             </Link>
           ))}
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.75rem', marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
+          <div style={{ borderTop: '1px solid #e4e4e7', paddingTop: '0.75rem', marginTop: '0.5rem', display: 'flex', gap: '0.5rem' }}>
             <Link href={`/${locale}/login`} onClick={() => setMenuOpen(false)} className="btn-midday-secondary" style={{ flex: 1, textAlign: 'center' }}>Sign In</Link>
             <Link href={`/${locale}/register`} onClick={() => setMenuOpen(false)} className="btn-midday-primary" style={{ flex: 1, textAlign: 'center' }}>Get Started</Link>
           </div>

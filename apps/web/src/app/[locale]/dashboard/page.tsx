@@ -45,9 +45,9 @@ const MOCK_EXPERTS: Expert[] = [
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-1 text-[11px] text-zinc-400 font-mono">
-      <span className="text-amber-400 font-bold">★</span>
-      <span className="text-zinc-200 font-semibold">{rating.toFixed(2)}</span>
+    <div className="flex items-center gap-1 text-[11px] text-zinc-600 font-mono">
+      <span className="text-amber-500 font-bold">★</span>
+      <span className="text-zinc-900 font-semibold">{rating.toFixed(2)}</span>
     </div>
   );
 }
@@ -55,7 +55,7 @@ function StarRating({ rating }: { rating: number }) {
 function AvatarInitials({ name }: { name: string }) {
   const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
   return (
-    <div className="w-11 h-11 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-100 flex-shrink-0">
+    <div className="w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-900 flex-shrink-0">
       {initials}
     </div>
   );
@@ -64,36 +64,36 @@ function AvatarInitials({ name }: { name: string }) {
 function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
   const p = expert.profile;
   return (
-    <div className="bento-card p-5 flex flex-col justify-between space-y-4">
+    <div className="bento-card p-5 flex flex-col justify-between space-y-4 bg-white border border-zinc-200 shadow-sm hover:border-zinc-300 hover:shadow-md">
       <div className="space-y-3">
         {/* Top Info Header */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
             {p?.avatarUrl ? (
-              <img src={p.avatarUrl} alt={expert.name} className="w-11 h-11 rounded-xl object-cover border border-zinc-800 flex-shrink-0" />
+              <img src={p.avatarUrl} alt={expert.name} className="w-11 h-11 rounded-xl object-cover border border-zinc-200 flex-shrink-0" />
             ) : (
               <AvatarInitials name={expert.name} />
             )}
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <h3 className="font-bold text-sm text-white truncate">{expert.name}</h3>
-                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.2 rounded border border-emerald-500/20">VERIFIED</span>
+                <h3 className="font-bold text-sm text-zinc-950 truncate">{expert.name}</h3>
+                <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200 font-semibold">VERIFIED</span>
               </div>
-              <p className="text-xs text-zinc-400 truncate mt-0.5">{p?.headline}</p>
+              <p className="text-xs text-zinc-500 truncate mt-0.5">{p?.headline}</p>
             </div>
           </div>
 
           {p?.hourlyRate && (
             <div className="text-right flex-shrink-0">
-              <div className="text-base font-extrabold text-white tracking-tight">${p.hourlyRate}</div>
-              <div className="text-[10px] font-mono text-zinc-500 uppercase">/ hr</div>
+              <div className="text-base font-extrabold text-zinc-950 tracking-tight">${p.hourlyRate}</div>
+              <div className="text-[10px] font-mono text-zinc-400 uppercase">/ hr</div>
             </div>
           )}
         </div>
 
         {/* Bio Preview */}
         {p?.bio && (
-          <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-zinc-600 line-clamp-2 leading-relaxed">
             {p.bio}
           </p>
         )}
@@ -102,7 +102,7 @@ function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
         {p?.skills && p.skills.length > 0 && (
           <div className="flex flex-wrap gap-1.5 pt-1">
             {p.skills.slice(0, 4).map((s) => (
-              <span key={s} className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900 text-zinc-400 border border-zinc-800">
+              <span key={s} className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-100 text-zinc-700 border border-zinc-200">
                 {s}
               </span>
             ))}
@@ -111,11 +111,11 @@ function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
       </div>
 
       {/* Action Footer */}
-      <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-3">
+      <div className="pt-3 border-t border-zinc-100 flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           {p?.rating && <StarRating rating={p.rating} />}
-          <span className="text-[11px] text-zinc-500">·</span>
-          <span className="text-[11px] text-zinc-400 flex items-center gap-1">
+          <span className="text-[11px] text-zinc-300">·</span>
+          <span className="text-[11px] text-zinc-600 flex items-center gap-1">
             <span className="status-dot"></span> Available
           </span>
         </div>
@@ -145,22 +145,22 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
   const experts = await getExperts();
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-[#fafafa] relative">
+    <div className="min-h-screen bg-white text-[#09090b] relative">
       <Navbar locale={locale} />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-white/[0.06] pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-zinc-200 pb-6">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1.5">
               <span>EVEKSH DIRECTORY</span>
               <span>·</span>
-              <span className="text-zinc-300">500+ VERIFIED MENTORS</span>
+              <span className="text-zinc-900 font-semibold">500+ VERIFIED MENTORS</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-white">
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-zinc-950">
               Explore Mentors
             </h1>
-            <p className="text-zinc-400 text-xs sm:text-sm mt-1">
+            <p className="text-zinc-600 text-xs sm:text-sm mt-1">
               Direct access to verified tech leaders, AI researchers, and startup founders.
             </p>
           </div>
@@ -178,7 +178,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
 
         {/* Directory Grid */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs font-mono uppercase text-zinc-400">
+          <div className="flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
             <span>AVAILABLE EXPERTS ({experts.length})</span>
             <span>SORTED BY RELEVANCE</span>
           </div>

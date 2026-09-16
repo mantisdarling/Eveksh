@@ -49,44 +49,44 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#09090b] text-[#fafafa] flex flex-col justify-between items-center p-4 sm:p-6 relative overflow-hidden">
-      {/* ── Midday Subtle Architectural Grid ── */}
-      <div className="absolute inset-0 bg-grid bg-radial-fade pointer-events-none opacity-40" />
+    <div className="min-h-screen w-full bg-[#fafafa] text-[#09090b] flex flex-col justify-between items-center p-4 sm:p-6 relative overflow-hidden">
+      {/* ── Midday Subtle Light Architectural Grid ── */}
+      <div className="absolute inset-0 bg-grid bg-radial-fade pointer-events-none opacity-60" />
 
-      {/* ── Top Header Brand ── */}
+      {/* ── Top Header Brand (Light) ── */}
       <header className="relative z-10 w-full max-w-5xl flex items-center justify-between py-4">
         <Link href={`/${locale}`} className="flex items-center gap-2 text-decoration-none">
-          <span className="font-extrabold text-sm tracking-widest text-white uppercase">EVEKSH</span>
+          <span className="font-extrabold text-sm tracking-widest text-zinc-950 uppercase">EVEKSH</span>
           <span className="status-dot" />
         </Link>
         <Link
           href={`/${locale}/register`}
-          className="text-xs font-mono text-zinc-400 hover:text-white transition-colors"
+          className="text-xs font-mono text-zinc-500 hover:text-black transition-colors"
         >
-          Need an account? <span className="text-white underline underline-offset-4">Sign up →</span>
+          Need an account? <span className="text-zinc-950 font-semibold underline underline-offset-4">Sign up →</span>
         </Link>
       </header>
 
-      {/* ── Midday Authentication Card ── */}
+      {/* ── Midday Light Authentication Card ── */}
       <div className="relative z-10 w-full max-w-[420px] my-auto">
-        <div className="bento-card p-8 sm:p-9 space-y-6 shadow-2xl border border-white/[0.08] bg-[#121214]">
+        <div className="p-8 sm:p-9 space-y-6 shadow-xl border border-zinc-200 bg-white rounded-2xl">
           
           {/* Header */}
           <div className="text-center space-y-1.5">
-            <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mx-auto mb-3 shadow-inner">
-              <span className="text-xs font-bold text-white tracking-widest uppercase">EV</span>
+            <div className="w-10 h-10 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <span className="text-xs font-bold text-zinc-950 tracking-widest uppercase">EV</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950">
               Sign in to your account
             </h1>
-            <p className="text-xs text-zinc-400 font-normal">
+            <p className="text-xs text-zinc-500 font-normal">
               Welcome back. Enter your credentials to continue.
             </p>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs text-center font-medium">
+            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs text-center font-medium">
               {error}
             </div>
           )}
@@ -96,7 +96,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 text-zinc-200 transition-all text-xs font-medium shadow-sm"
+              className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 rounded-xl bg-white border border-zinc-200 hover:bg-zinc-50 hover:border-zinc-300 text-zinc-800 transition-all text-xs font-medium shadow-sm"
             >
               <svg width="15" height="15" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -110,8 +110,8 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="relative flex items-center justify-center my-4">
-            <div className="w-full border-t border-zinc-800" />
-            <span className="bg-[#121214] px-3 text-[10px] font-mono uppercase tracking-wider text-zinc-500 absolute">
+            <div className="w-full border-t border-zinc-200" />
+            <span className="bg-white px-3 text-[10px] font-mono uppercase tracking-wider text-zinc-400 absolute">
               OR CONTINUE WITH EMAIL
             </span>
           </div>
@@ -119,7 +119,7 @@ export default function LoginPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-zinc-400 mb-1.5" htmlFor="login-email">
+              <label className="block text-xs font-medium text-zinc-700 mb-1.5" htmlFor="login-email">
                 Email address
               </label>
               <input
@@ -129,16 +129,16 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
                 required
-                className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-zinc-500 focus:outline-none text-xs text-white placeholder-zinc-600 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-200 focus:border-zinc-950 focus:outline-none text-xs text-zinc-900 placeholder-zinc-400 transition-colors shadow-sm"
               />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-medium text-zinc-400" htmlFor="login-password">
+                <label className="block text-xs font-medium text-zinc-700" htmlFor="login-password">
                   Password
                 </label>
-                <Link href={`/${locale}/login`} className="text-xs text-zinc-400 hover:text-white transition-colors">
+                <Link href={`/${locale}/login`} className="text-xs text-zinc-500 hover:text-black transition-colors font-medium">
                   Forgot password?
                 </Link>
               </div>
@@ -149,11 +149,11 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 focus:border-zinc-500 focus:outline-none text-xs text-white placeholder-zinc-600 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-zinc-200 focus:border-zinc-950 focus:outline-none text-xs text-zinc-900 placeholder-zinc-400 transition-colors shadow-sm"
               />
             </div>
 
-            {/* Midday Solid White Submit Button */}
+            {/* Midday Solid Black Submit Button */}
             <button
               id="login-submit"
               type="submit"
@@ -168,13 +168,13 @@ export default function LoginPage() {
         {/* Legal Disclaimer */}
         <p className="text-center text-[11px] font-mono text-zinc-500 mt-6 leading-relaxed">
           By signing in, you agree to EVEKSH&apos;s{' '}
-          <span className="text-zinc-400 hover:text-white cursor-pointer underline">Terms</span> and{' '}
-          <span className="text-zinc-400 hover:text-white cursor-pointer underline">Privacy Policy</span>.
+          <span className="text-zinc-700 hover:text-black cursor-pointer underline">Terms</span> and{' '}
+          <span className="text-zinc-700 hover:text-black cursor-pointer underline">Privacy Policy</span>.
         </p>
       </div>
 
       {/* ── Footer ── */}
-      <footer className="relative z-10 w-full max-w-5xl py-4 text-center text-xs font-mono text-zinc-600">
+      <footer className="relative z-10 w-full max-w-5xl py-4 text-center text-xs font-mono text-zinc-400">
         © {new Date().getFullYear()} EVEKSH Inc. All rights reserved.
       </footer>
     </div>
