@@ -38,7 +38,7 @@ export default function CheckoutPage() {
             </div>
 
             <div style={{ marginTop: '1.5rem', padding: '1rem', background: 'rgba(99,102,241,0.08)', borderRadius: '0.875rem', border: '1px solid rgba(99,102,241,0.2)' }}>
-              <p style={{ fontSize: '0.8rem', color: '#818cf8', fontWeight: 500, marginBottom: '0.25rem' }}>🔒 Escrow Protection</p>
+              <p style={{ fontSize: '0.8rem', color: '#818cf8', fontWeight: 500, marginBottom: '0.25rem' }}>Escrow Protection</p>
               <p style={{ fontSize: '0.78rem', color: '#71717a', lineHeight: 1.6 }}>Your $150 is held securely until your session ends. If your mentor doesn't show up, you get a full refund.</p>
             </div>
           </div>

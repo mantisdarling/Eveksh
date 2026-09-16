@@ -77,7 +77,11 @@ export default function AppointmentsPage() {
                 </div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                   <p style={{ color: '#a1a1aa', fontSize: '0.875rem', marginBottom: '0.15rem' }}>{s.day} · {s.time}</p>
-                  <span style={{ color: '#fbbf24' }}>{'★'.repeat(s.rating || 0)}</span>
+                  {s.rating ? (
+                    <span style={{ color: '#a1a1aa', fontSize: '0.75rem', fontFamily: 'monospace' }}>
+                      {s.rating}.0 / 5.0
+                    </span>
+                  ) : null}
                 </div>
               </div>
             ))}

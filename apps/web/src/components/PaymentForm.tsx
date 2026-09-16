@@ -93,7 +93,6 @@ function CheckoutForm({ amount, expertId, locale }: { amount: number; expertId: 
       </div>
 
       <div style={{ background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '0.75rem', padding: '0.875rem 1rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
-        <span style={{ fontSize: '1rem', flexShrink: 0 }}>🔒</span>
         <div>
           <p style={{ fontSize: '0.8rem', color: '#34d399', fontWeight: 600, marginBottom: '0.15rem' }}>Escrow Protected</p>
           <p style={{ fontSize: '0.75rem', color: '#71717a', lineHeight: 1.5 }}>
@@ -114,7 +113,7 @@ function CheckoutForm({ amount, expertId, locale }: { amount: number; expertId: 
             <span style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.6s linear infinite' }} />
             Processing...
           </span>
-        ) : `Pay $${amount} — Hold in Escrow 🔒`}
+        ) : `Pay $${amount} — Hold in Escrow`}
       </button>
 
       <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#52525b' }}>

@@ -95,7 +95,7 @@ export default function MessagesPage() {
 
             {/* Socket.io badge */}
             <div style={{ padding: '0.5rem 1.5rem', background: 'rgba(99,102,241,0.06)', borderTop: '1px solid rgba(99,102,241,0.1)', borderBottom: '1px solid rgba(99,102,241,0.1)', fontSize: '0.75rem', color: '#6366f1', textAlign: 'center' }}>
-              ⚡ Real-time messaging powered by Socket.io
+              Real-time messaging powered by Socket.io
             </div>
 
             {/* Input */}

@@ -59,7 +59,6 @@ export default function RegisterPage() {
       <header className="relative z-10 w-full max-w-5xl flex items-center justify-between py-4">
         <Link href={`/${locale}`} className="flex items-center gap-2 text-decoration-none">
           <span className="font-extrabold text-sm tracking-widest text-zinc-950 uppercase">EVEKSH</span>
-          <span className="status-dot" />
         </Link>
         <div className="flex items-center gap-4">
           <Link
@@ -103,7 +102,7 @@ export default function RegisterPage() {
                 role === 'LEARNER' ? 'bg-black text-white font-semibold shadow-sm' : 'text-zinc-600 hover:text-black'
               }`}
             >
-              🎓 Learner
+              Learner
             </button>
             <button
               type="button"
@@ -112,7 +111,7 @@ export default function RegisterPage() {
                 role === 'EXPERT' ? 'bg-black text-white font-semibold shadow-sm' : 'text-zinc-600 hover:text-black'
               }`}
             >
-              🧠 Mentor
+              Mentor
             </button>
           </div>
 

@@ -179,11 +179,10 @@ body {
 }
 
 .status-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+  background: #71717a;
   display: inline-block;
 }
 

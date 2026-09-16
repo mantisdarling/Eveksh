@@ -69,12 +69,10 @@ My sessions are direct, focused, and immediately actionable. I won't waste your 
   ],
 };
 
-function StarRating({ rating, size = 14 }: { rating: number; size?: number }) {
+function StarRating({ rating }: { rating: number; size?: number }) {
   return (
-    <span style={{ display: 'inline-flex', gap: 2, alignItems: 'center' }}>
-      {[1, 2, 3, 4, 5].map(i => (
-        <span key={i} style={{ color: i <= Math.round(rating) ? '#fbbf24' : '#3f3f46', fontSize: size }}>★</span>
-      ))}
+    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#09090b', fontFamily: 'monospace' }}>
+      {rating.toFixed(1)} / 5.0
     </span>
   );
 }
@@ -152,7 +150,7 @@ export default async function ExpertProfilePage({
               >
                 Book a Session →
               </a>
-              <p style={{ fontSize: '0.75rem', color: '#52525b' }}>🔒 $0 charged until session ends</p>
+              <p style={{ fontSize: '0.75rem', color: '#52525b' }}>$0 charged until session ends</p>
             </div>
           </div>
         </div>
@@ -220,15 +218,14 @@ export default async function ExpertProfilePage({
             <div className="glass-panel animate-fade-in-up-delay-2" style={{ borderRadius: '1.25rem', padding: '1.5rem' }}>
               <h3 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#71717a', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Session Types</h3>
               {[
-                { icon: '🎯', label: 'Career Coaching', duration: '60 min' },
-                { icon: '🏗️', label: 'System Design', duration: '90 min' },
-                { icon: '💼', label: 'Interview Prep', duration: '60 min' },
-                { icon: '🔍', label: 'Code Review', duration: '45 min' },
-              ].map(({ icon, label, duration }) => (
-                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.6rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <span style={{ fontSize: '1.1rem' }}>{icon}</span>
-                  <span style={{ flex: 1, color: '#a1a1aa', fontSize: '0.82rem' }}>{label}</span>
-                  <span style={{ color: '#71717a', fontSize: '0.75rem' }}>{duration}</span>
+                { label: 'Career Coaching', duration: '60 min' },
+                { label: 'System Design', duration: '90 min' },
+                { label: 'Interview Prep', duration: '60 min' },
+                { label: 'Code Review', duration: '45 min' },
+              ].map(({ label, duration }) => (
+                <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <span style={{ color: '#a1a1aa', fontSize: '0.82rem' }}>{label}</span>
+                  <span style={{ color: '#71717a', fontSize: '0.75rem', fontFamily: 'monospace' }}>{duration}</span>
                 </div>
               ))}
             </div>

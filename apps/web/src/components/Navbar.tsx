@@ -62,7 +62,6 @@ export function Navbar({ locale }: NavbarProps) {
             >
               EVEKSH
             </span>
-            <span className="status-dot" style={{ marginLeft: 2 }} />
           </Link>
 
           {/* Desktop Nav Links */}

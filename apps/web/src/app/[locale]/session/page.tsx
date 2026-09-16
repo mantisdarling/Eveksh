@@ -54,11 +54,15 @@ export default function SessionPage() {
             {/* Gradient bg */}
             <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 30%, rgba(99,102,241,0.08), transparent 60%), radial-gradient(ellipse at 70% 70%, rgba(168,85,247,0.06), transparent 60%)' }} />
             <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-              <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>🎥</div>
+              <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
+                <svg className="w-12 h-12 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
               <h2 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem' }}>Live Session</h2>
               <p style={{ color: '#71717a', fontSize: '0.875rem', marginBottom: '1.5rem' }}>WebRTC video — coming in the next release</p>
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
-                {['🎤 Mute','📷 Camera','🖥️ Share'].map(btn => (
+                {['Mute','Camera','Share Screen'].map(btn => (
                   <button key={btn} className="btn-ghost" style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }}>{btn}</button>
                 ))}
               </div>

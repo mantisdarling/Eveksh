@@ -13,10 +13,10 @@ const MOCK_USERS = [
 ];
 
 const ADMIN_STATS = [
-  { label: 'Total Users', value: '2,847', delta: '+12%', icon: '👥', color: '#6366f1' },
-  { label: 'Total Sessions', value: '14,203', delta: '+8%', icon: '📅', color: '#a855f7' },
-  { label: 'Revenue (MTD)', value: '$89,421', delta: '+21%', icon: '💰', color: '#10b981' },
-  { label: 'Active Experts', value: '512', delta: '+5%', icon: '🧠', color: '#f472b6' },
+  { label: 'Total Users', value: '2,847', delta: '+12%' },
+  { label: 'Total Sessions', value: '14,203', delta: '+8%' },
+  { label: 'Revenue (MTD)', value: '$89,421', delta: '+21%' },
+  { label: 'Active Experts', value: '512', delta: '+5%' },
 ];
 
 const roleBadge = (role: string) => ({
@@ -46,21 +46,18 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
             <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Admin <span className="gradient-text">Dashboard</span></h1>
             <p style={{ color: '#71717a', marginTop: '0.4rem' }}>Platform management and analytics overview.</p>
           </div>
-          <span style={{ background: 'rgba(244,114,182,0.1)', border: '1px solid rgba(244,114,182,0.3)', color: '#f472b6', padding: '0.4rem 1rem', borderRadius: '9999px', fontSize: '0.8rem', fontWeight: 600 }}>
-            🔐 ADMIN ACCESS
+          <span style={{ background: '#f4f4f5', border: '1px solid #e4e4e7', color: '#71717a', padding: '0.35rem 0.85rem', borderRadius: '0.5rem', fontSize: '0.75rem', fontWeight: 600, fontFamily: 'monospace' }}>
+            ADMIN ACCESS
           </span>
         </div>
 
         {/* Stats */}
         <div className="animate-fade-in-up-delay-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginBottom: '2.5rem' }}>
           {ADMIN_STATS.map(s => (
-            <div key={s.label} className="glass-panel" style={{ borderRadius: '1rem', padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ width: 48, height: 48, borderRadius: '0.875rem', background: `${s.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', flexShrink: 0 }}>{s.icon}</div>
-              <div>
-                <p style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fafafa', lineHeight: 1 }}>{s.value}</p>
-                <p style={{ fontSize: '0.75rem', color: '#71717a', marginTop: '0.2rem' }}>{s.label}</p>
-                <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 600 }}>{s.delta} this month</span>
-              </div>
+            <div key={s.label} className="glass-panel" style={{ borderRadius: '1rem', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+              <p style={{ fontSize: '0.75rem', color: '#71717a' }}>{s.label}</p>
+              <p style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fafafa', lineHeight: 1 }}>{s.value}</p>
+              <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 600 }}>{s.delta} this month</span>
             </div>
           ))}
         </div>

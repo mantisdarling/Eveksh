@@ -46,7 +46,7 @@ const MOCK_EXPERTS: Expert[] = [
 function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex items-center gap-1 text-[11px] text-zinc-600 font-mono">
-      <span className="text-amber-500 font-bold">★</span>
+      <span>Rating</span>
       <span className="text-zinc-900 font-semibold">{rating.toFixed(2)}</span>
     </div>
   );
@@ -77,7 +77,7 @@ function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <h3 className="font-bold text-sm text-zinc-950 truncate">{expert.name}</h3>
-                <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200 font-semibold">VERIFIED</span>
+                <span className="text-[10px] font-mono text-zinc-600 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200 font-medium">Verified</span>
               </div>
               <p className="text-xs text-zinc-500 truncate mt-0.5">{p?.headline}</p>
             </div>
@@ -115,8 +115,8 @@ function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
         <div className="flex items-center gap-2">
           {p?.rating && <StarRating rating={p.rating} />}
           <span className="text-[11px] text-zinc-300">·</span>
-          <span className="text-[11px] text-zinc-600 flex items-center gap-1">
-            <span className="status-dot"></span> Available
+          <span className="text-[11px] text-zinc-500">
+            Available
           </span>
         </div>
 
@@ -153,9 +153,9 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-zinc-200 pb-6">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1.5">
-              <span>EVEKSH DIRECTORY</span>
+              <span>Directory</span>
               <span>·</span>
-              <span className="text-zinc-900 font-semibold">500+ VERIFIED MENTORS</span>
+              <span className="text-zinc-900 font-semibold">500+ Mentors</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-zinc-950">
               Explore Mentors

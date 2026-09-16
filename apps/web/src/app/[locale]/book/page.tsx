@@ -48,12 +48,12 @@ export default function BookPage() {
           <div className="glass-panel" style={{ borderRadius: '1.25rem', padding: '2rem' }}>
             <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'linear-gradient(135deg, #6366f1, #a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.6rem', fontWeight: 700, color: '#fff', marginBottom: '1.25rem' }}>E</div>
             <h2 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.25rem' }}>Expert Mentor</h2>
-            <p style={{ color: '#71717a', fontSize: '0.85rem', marginBottom: '1rem' }}>Industry veteran · 4.9★</p>
+            <p style={{ color: '#71717a', fontSize: '0.85rem', marginBottom: '1rem' }}>Industry veteran · Rating 4.9 / 5.0</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-              {[['⏱️ Duration','60 minutes'],['💰 Rate','$150/hr'],['🔒 Payment','Escrow — only released after session'],['🎥 Format','Live video + chat']].map(([icon, val]) => (
+              {[['Duration','60 minutes'],['Rate','$150/hr'],['Payment','Escrow — only released after session'],['Format','Live video + chat']].map(([label, val]) => (
                 <div key={val} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                  <span style={{ color: '#71717a' }}>{icon}</span>
-                  <span style={{ color: '#fafafa', fontWeight: 500 }}>{val}</span>
+                  <span style={{ color: '#71717a' }}>{label}</span>
+                  <span style={{ color: '#09090b', fontWeight: 500 }}>{val}</span>
                 </div>
               ))}
             </div>
