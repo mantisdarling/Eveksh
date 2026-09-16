@@ -1,18 +1,18 @@
-# MANTIS — Mentorship Marketplace
+# EVEKSH — Mentorship Marketplace
 
 > **Stop guessing, start talking.**
 
-MANTIS is a mentorship marketplace built for serious learners and seasoned professionals. Connect instantly with vetted industry veterans and PhD researchers for 1-on-1 live mentorship sessions.
+EVEKSH is a mentorship marketplace built for serious builders, engineering leaders, and founders. Connect instantly with vetted industry veterans and researchers for 1-on-1 live mentorship sessions protected by Stripe Escrow.
 
 ---
 
 ## Architecture
 
 ```
-mantis/
+eveksh/
 ├── apps/
 │   ├── api/          # NestJS 11 + Express 5 + Prisma 7 + PostgreSQL
-│   ├── web/          # Next.js 15 + React 19 + next-intl + Stripe
+│   ├── web/          # Next.js 16 + React 19 + next-intl + Stripe
 │   └── recommender/  # FastAPI + scikit-learn (Python 3.12)
 ├── docker-compose.yml
 ├── turbo.json

@@ -34,7 +34,7 @@ export function SearchBar({ locale }: SearchBarProps) {
         setOpen(true);
       }
     } catch {
-      // Silently fail — search is non-critical
+      // Non-critical
     } finally {
       setLoading(false);
     }
@@ -46,7 +46,6 @@ export function SearchBar({ locale }: SearchBarProps) {
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [query, search]);
 
-  // Close on click outside
   useEffect(() => {
     function handler(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -58,60 +57,73 @@ export function SearchBar({ locale }: SearchBarProps) {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ position: 'relative', maxWidth: 560 }}>
-      <div style={{ position: 'relative' }}>
-        <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#52525b', fontSize: '1rem' }}>🔍</span>
+    <div ref={containerRef} className="relative w-full max-w-2xl">
+      <div className="relative flex items-center">
+        <span className="absolute left-3.5 text-zinc-500 text-sm">⌕</span>
         <input
           id="expert-search"
           type="text"
           value={query}
           onChange={e => setQuery(e.target.value)}
           onFocus={() => results.length > 0 && setOpen(true)}
-          placeholder="Search experts by skill, name, or topic..."
-          className="input-base"
-          style={{ paddingLeft: '2.75rem', paddingRight: loading ? '3rem' : '1rem' }}
+          placeholder="Search by skill, domain, or company (e.g. 'Kubernetes', 'LLMs', 'Google')..."
+          className="w-full bg-zinc-950/80 border border-zinc-800 rounded-xl pl-9 pr-16 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500 transition-colors shadow-inner"
         />
-        {loading && (
-          <span style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', width: 16, height: 16, border: '2px solid rgba(99,102,241,0.3)', borderTopColor: '#6366f1', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.6s linear infinite' }} />
-        )}
+        <div className="absolute right-3 flex items-center gap-1.5">
+          {loading ? (
+            <span className="w-3.5 h-3.5 border-2 border-zinc-600 border-t-white rounded-full animate-spin" />
+          ) : (
+            <span className="kbd text-[10px]">ESC</span>
+          )}
+        </div>
       </div>
 
-      {/* Dropdown */}
+      {/* Midday Command Dropdown */}
       {open && results.length > 0 && (
-        <div
-          style={{ position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0, background: 'rgba(18,18,22,0.98)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '1rem', overflow: 'hidden', zIndex: 200, boxShadow: '0 24px 64px rgba(0,0,0,0.6)' }}
-        >
-          {results.map((r, i) => (
-            <Link
-              key={r.id}
-              href={`/${locale}/book?expert=${r.id}`}
-              onClick={() => { setOpen(false); setQuery(''); }}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.875rem', padding: '0.875rem 1.25rem', textDecoration: 'none', borderBottom: i < results.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', transition: 'background 0.15s' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(99,102,241,0.08)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-            >
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'linear-gradient(135deg,#6366f1,#a855f7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#fff', flexShrink: 0 }}>{r.name.charAt(0)}</div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontWeight: 600, color: '#fafafa', fontSize: '0.9rem', marginBottom: '0.1rem' }}>{r.name}</p>
-                <p style={{ color: '#71717a', fontSize: '0.78rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.profile?.headline}</p>
-              </div>
-              {r.profile?.skills && (
-                <div style={{ display: 'flex', gap: '0.3rem', flexShrink: 0 }}>
-                  {r.profile.skills.slice(0, 2).map(s => <span key={s} className="skill-chip" style={{ fontSize: '0.68rem' }}>{s}</span>)}
+        <div className="absolute top-full mt-2 w-full bg-[#121214] border border-zinc-800 rounded-xl overflow-hidden z-50 shadow-2xl">
+          <div className="px-3 py-1.5 border-b border-zinc-800/80 text-[10px] font-mono uppercase text-zinc-500 flex justify-between">
+            <span>RESULTS</span>
+            <span>PRESS ENTER TO SELECT</span>
+          </div>
+
+          <div className="max-h-72 overflow-y-auto divide-y divide-zinc-800/40">
+            {results.map((r) => (
+              <Link
+                key={r.id}
+                href={`/${locale}/book?expert=${r.id}`}
+                onClick={() => { setOpen(false); setQuery(''); }}
+                className="flex items-center justify-between p-3 hover:bg-zinc-900 transition-colors text-decoration-none"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700 flex items-center justify-center font-bold text-xs text-white flex-shrink-0">
+                    {r.name.charAt(0)}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-xs text-white truncate">{r.name}</p>
+                    <p className="text-[11px] text-zinc-400 truncate">{r.profile?.headline}</p>
+                  </div>
                 </div>
-              )}
-            </Link>
-          ))}
+
+                {r.profile?.skills && (
+                  <div className="hidden sm:flex gap-1 flex-shrink-0">
+                    {r.profile.skills.slice(0, 2).map((s) => (
+                      <span key={s} className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-zinc-900 border border-zinc-800 text-zinc-400">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
 
       {open && results.length === 0 && query.trim() && !loading && (
-        <div style={{ position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0, background: 'rgba(18,18,22,0.98)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '1rem', padding: '1.5rem', textAlign: 'center', color: '#71717a', fontSize: '0.875rem', zIndex: 200 }}>
-          No experts found for &ldquo;{query}&rdquo;
+        <div className="absolute top-full mt-2 w-full bg-[#121214] border border-zinc-800 rounded-xl p-4 text-center text-zinc-400 text-xs z-50">
+          No mentors found matching &ldquo;{query}&rdquo;
         </div>
       )}
-
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }

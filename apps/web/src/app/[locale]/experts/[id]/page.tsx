@@ -42,8 +42,8 @@ export async function generateMetadata({
   const { id } = await params;
   const expert = await getExpert(id);
   return {
-    title: expert ? `${expert.name} — MANTIS` : 'Expert Profile — MANTIS',
-    description: expert?.profile?.bio || 'View this expert\'s profile on MANTIS.',
+    title: expert ? `${expert.name} — EVEKSH` : 'Expert Profile — EVEKSH',
+    description: expert?.profile?.bio || 'View this expert\'s profile on EVEKSH.',
   };
 }
 

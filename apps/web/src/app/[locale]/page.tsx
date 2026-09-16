@@ -1,11 +1,12 @@
 import { useTranslations } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import { Navbar } from '@/components/Navbar';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'MANTIS — Stop guessing, start talking.',
-  description: 'Connect with vetted expert mentors for 1-on-1 live sessions with escrow payments.',
+  title: 'EVEKSH — Stop guessing, start talking.',
+  description: 'Direct 1-on-1 on-demand access to vetted engineering leaders, AI researchers, and startup founders. Protected by Stripe Escrow.',
 };
 
 export default async function HomePage({
@@ -23,280 +24,178 @@ function HomePageClient({ locale }: { locale: string }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const t = useTranslations('Index');
 
-  const features = [
+  const bentoFeatures = [
     {
-      icon: '🎥',
+      tag: t('feature1Tag'),
       title: t('feature1Title'),
       desc: t('feature1Desc'),
-      gradient: 'from-indigo-500/20 to-purple-500/20',
-      border: 'border-indigo-500/20',
+      icon: '⚡',
+      preview: (
+        <div className="mt-4 p-4 rounded-xl bg-zinc-950/80 border border-zinc-800/80 font-mono text-xs space-y-2">
+          <div className="flex items-center justify-between text-[11px] text-zinc-500 border-b border-zinc-800/80 pb-2">
+            <span className="flex items-center gap-1.5"><span className="status-dot"></span> LIVE RTC CALL</span>
+            <span>00:42:19</span>
+          </div>
+          <div className="flex items-center justify-between text-zinc-300">
+            <span>Sarah Chen (Ex-Staff Google)</span>
+            <span className="text-emerald-400 font-semibold">Connected</span>
+          </div>
+          <div className="text-[11px] text-zinc-500">Shared Whiteboard: Distributed Spanner Consensus</div>
+        </div>
+      ),
     },
     {
-      icon: '🔒',
+      tag: t('feature2Tag'),
       title: t('feature2Title'),
       desc: t('feature2Desc'),
-      gradient: 'from-purple-500/20 to-pink-500/20',
-      border: 'border-purple-500/20',
+      icon: '🔒',
+      preview: (
+        <div className="mt-4 p-4 rounded-xl bg-zinc-950/80 border border-zinc-800/80 font-mono text-xs space-y-2">
+          <div className="flex justify-between items-center text-[11px] text-zinc-500 border-b border-zinc-800/80 pb-2">
+            <span>ESCROW STATE</span>
+            <span className="text-amber-400 font-semibold">FUNDS SECURED</span>
+          </div>
+          <div className="flex justify-between text-zinc-300">
+            <span>Session Authorization</span>
+            <span className="text-white font-bold">$220.00</span>
+          </div>
+          <div className="text-[11px] text-zinc-500">Auto-release only after verified completion</div>
+        </div>
+      ),
     },
     {
-      icon: '🤖',
+      tag: t('feature3Tag'),
       title: t('feature3Title'),
       desc: t('feature3Desc'),
-      gradient: 'from-pink-500/20 to-indigo-500/20',
-      border: 'border-pink-500/20',
+      icon: '🧠',
+      preview: (
+        <div className="mt-4 p-4 rounded-xl bg-zinc-950/80 border border-zinc-800/80 font-mono text-xs space-y-2">
+          <div className="flex justify-between items-center text-[11px] text-zinc-500 border-b border-zinc-800/80 pb-2">
+            <span>AI MATCH ACCURACY</span>
+            <span className="text-indigo-400 font-semibold">99.4% MATCH</span>
+          </div>
+          <div className="flex justify-between text-zinc-300">
+            <span>Query: &quot;PostgreSQL 50k RPS&quot;</span>
+            <span className="text-white">Top 3 Experts</span>
+          </div>
+          <div className="text-[11px] text-zinc-500">Ranked by verified domain benchmarks</div>
+        </div>
+      ),
     },
   ];
 
-  const trust = [t('trustStat1'), t('trustStat2'), t('trustStat3')];
+  const metrics = [
+    { label: t('trustStat1'), value: '500+' },
+    { label: t('trustStat2'), value: '4.97 ★' },
+    { label: t('trustStat3'), value: '$0' },
+    { label: 'Avg. Response Time', value: '< 2 hrs' },
+  ];
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: '#09090b',
-        color: '#fafafa',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      {/* ── Background orbs ── */}
-      <div
-        className="orb-pulse"
-        style={{
-          position: 'fixed',
-          top: '-15%',
-          left: '-10%',
-          width: '50%',
-          height: '50%',
-          background: 'radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%)',
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
-      />
-      <div
-        className="orb-pulse"
-        style={{
-          position: 'fixed',
-          bottom: '-15%',
-          right: '-10%',
-          width: '50%',
-          height: '50%',
-          background: 'radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%)',
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
-          zIndex: 0,
-          animationDelay: '4s',
-        }}
-      />
+    <div className="min-h-screen bg-[#09090b] text-[#fafafa] relative overflow-hidden">
+      <Navbar locale={locale} />
 
-      {/* ── Navbar ── */}
-      <nav
-        className="glass-panel"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          padding: '0 2rem',
-          height: '64px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderTop: 'none',
-          borderLeft: 'none',
-          borderRight: 'none',
-        }}
-      >
-        <Link href={`/${locale}`} style={{ textDecoration: 'none' }}>
-          <span
-            className="gradient-text"
-            style={{ fontSize: '1.4rem', fontWeight: 800, letterSpacing: '-0.03em' }}
-          >
-            MANTIS
-          </span>
-        </Link>
-        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <Link href={`/${locale}/login`} className="btn-ghost" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
-            {t('login')}
-          </Link>
-          <Link href={`/${locale}/register`} className="btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
-            {t('getStarted')}
-          </Link>
-        </div>
-      </nav>
+      {/* ── Architectural Background Grid ── */}
+      <div className="absolute inset-0 bg-grid bg-radial-fade pointer-events-none opacity-40 h-[1000px]" />
 
-      {/* ── Hero ── */}
-      <section
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          padding: '8rem 1.5rem 4rem',
-        }}
-      >
-        {/* Badge */}
-        <div className="animate-fade-in-up" style={{ marginBottom: '2rem' }}>
-          <span
-            className="glass-panel"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.4rem 1.1rem',
-              borderRadius: '9999px',
-              fontSize: '0.8rem',
-              fontWeight: 500,
-              color: '#818cf8',
-              letterSpacing: '0.02em',
-            }}
-          >
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#6366f1', display: 'inline-block', boxShadow: '0 0 8px #6366f1' }} />
-            {t('badge')}
-          </span>
+      {/* ── Hero Section ── */}
+      <section className="relative z-10 pt-32 sm:pt-40 pb-20 px-4 sm:px-6 max-w-5xl mx-auto text-center">
+        {/* Top Minimalist Pill Badge */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-zinc-900/60 backdrop-blur-md text-[11px] font-mono tracking-wider uppercase text-zinc-400 mb-8 animate-fade-in">
+          <span className="status-dot"></span>
+          {t('badge')}
         </div>
 
-        {/* Headline */}
-        <h1
-          className="animate-fade-in-up-delay-1"
-          style={{
-            fontSize: 'clamp(3rem, 8vw, 6rem)',
-            fontWeight: 900,
-            lineHeight: 1.05,
-            letterSpacing: '-0.04em',
-            marginBottom: '1.5rem',
-            maxWidth: '800px',
-          }}
-        >
-          <span style={{ color: '#fafafa', display: 'block' }}>{t('titlePart1')}</span>
-          <span className="gradient-text" style={{ display: 'block' }}>{t('titlePart2')}</span>
+        {/* High-Impact Headline */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-[-0.04em] text-white leading-[1.06] mb-6">
+          {t('titlePart1')} <br />
+          <span className="text-zinc-500">{t('titlePart2')}</span>
         </h1>
 
-        {/* Subtitle */}
-        <p
-          className="animate-fade-in-up-delay-2"
-          style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-            color: '#a1a1aa',
-            lineHeight: 1.7,
-            maxWidth: '600px',
-            marginBottom: '3rem',
-          }}
-        >
+        {/* Clean Subtitle */}
+        <p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 font-normal">
           {t('subtitle')}
         </p>
 
-        {/* CTAs */}
-        <div
-          className="animate-fade-in-up-delay-3"
-          style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '4rem' }}
-        >
-          <Link href={`/${locale}/dashboard`} className="btn-primary" style={{ fontSize: '1rem', padding: '0.9rem 2.25rem' }}>
+        {/* Midday High-Contrast Action Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-3.5 mb-16">
+          <Link
+            href={`/${locale}/dashboard`}
+            className="btn-midday-primary text-sm py-3 px-7"
+          >
             {t('ctaLearner')} →
           </Link>
-          <Link href={`/${locale}/register`} className="btn-ghost" style={{ fontSize: '1rem', padding: '0.9rem 2.25rem' }}>
+          <Link
+            href={`/${locale}/register`}
+            className="btn-midday-secondary text-sm py-3 px-7"
+          >
             {t('ctaExpert')}
           </Link>
         </div>
 
-        {/* Trust stats */}
-        <div
-          className="animate-fade-in-up-delay-3"
-          style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap', justifyContent: 'center' }}
-        >
-          {trust.map((stat, i) => (
-            <div key={i} style={{ textAlign: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: 500 }}>{stat}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Features ── */}
-      <section
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          padding: '6rem 1.5rem',
-          maxWidth: '1100px',
-          margin: '0 auto',
-        }}
-      >
-        <h2
-          style={{
-            textAlign: 'center',
-            fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-            fontWeight: 800,
-            letterSpacing: '-0.03em',
-            marginBottom: '1rem',
-            color: '#fafafa',
-          }}
-        >
-          {t('featuresTitle')}
-        </h2>
-        <p style={{ textAlign: 'center', color: '#71717a', marginBottom: '3.5rem', fontSize: '1rem' }}>
-          Purpose-built for serious learners and seasoned professionals.
-        </p>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-          {features.map((f, i) => (
-            <div
-              key={i}
-              className="glass-panel card-hover"
-              style={{
-                padding: '2rem',
-                borderRadius: '1.25rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-              }}
-            >
-              <div
-                style={{
-                  width: 52,
-                  height: 52,
-                  borderRadius: '0.875rem',
-                  background: `linear-gradient(135deg, rgba(99,102,241,0.2), rgba(168,85,247,0.2))`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '1.5rem',
-                }}
-              >
-                {f.icon}
+        {/* Midday Metric Grid Tiles */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.08] rounded-2xl overflow-hidden border border-white/[0.08] max-w-4xl mx-auto">
+          {metrics.map((m, i) => (
+            <div key={i} className="bg-[#0c0c0e] p-5 text-center">
+              <div className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-1">
+                {m.value}
               </div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fafafa' }}>{f.title}</h3>
-              <p style={{ color: '#71717a', lineHeight: 1.7, fontSize: '0.9rem' }}>{f.desc}</p>
+              <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-500">
+                {m.label}
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Footer ── */}
-      <footer
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-          padding: '2.5rem 1.5rem',
-          textAlign: 'center',
-          color: '#52525b',
-          fontSize: '0.85rem',
-        }}
-      >
-        <span className="gradient-text" style={{ fontWeight: 700, fontSize: '1rem' }}>MANTIS</span>
-        <span style={{ margin: '0 0.75rem' }}>·</span>
-        Stop guessing, start talking.
-        <span style={{ margin: '0 0.75rem' }}>·</span>
-        © {new Date().getFullYear()} All rights reserved.
+      {/* ── Midday Bento Grid Features ── */}
+      <section className="relative z-10 py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/[0.06]">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="badge-mono mb-3 inline-block">ENGINEERED FOR EXCELLENCE</span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-white mb-3">
+            {t('featuresTitle')}
+          </h2>
+          <p className="text-zinc-400 text-sm">
+            Everything you need for verified high-impact mentorship without platform friction.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {bentoFeatures.map((b, i) => (
+            <div key={i} className="bento-card p-6 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="badge-mono">{b.tag}</span>
+                  <span className="text-lg text-zinc-400">{b.icon}</span>
+                </div>
+                <h3 className="text-base font-bold text-white mb-2 tracking-tight">
+                  {b.title}
+                </h3>
+                <p className="text-xs text-zinc-400 leading-relaxed font-normal">
+                  {b.desc}
+                </p>
+              </div>
+
+              {b.preview}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Midday Architectural Footer ── */}
+      <footer className="relative z-10 border-t border-white/[0.06] py-12 px-4 sm:px-6 max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
+        <div className="flex items-center gap-2">
+          <span className="font-extrabold tracking-widest text-white uppercase text-sm">EVEKSH</span>
+          <span>·</span>
+          <span>STOP GUESSING, START TALKING.</span>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <span className="flex items-center gap-1.5">
+            <span className="status-dot"></span> All Systems Operational
+          </span>
+          <span>© {new Date().getFullYear()} EVEKSH Inc.</span>
+        </div>
       </footer>
     </div>
   );

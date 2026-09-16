@@ -2,7 +2,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: 'Admin — MANTIS' };
+export const metadata: Metadata = { title: 'Admin — EVEKSH' };
 
 const MOCK_USERS = [
   { id: '1', name: 'Sarah Chen', email: 'sarah@example.com', role: 'EXPERT', sessions: 42, joined: 'Jan 2024' },

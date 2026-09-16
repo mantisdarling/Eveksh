@@ -1,17 +1,27 @@
 import { setRequestLocale } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
-import { DashboardCharts } from '@/components/DashboardCharts';
 import { SearchBar } from '@/components/SearchBar';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = { title: 'Dashboard — MANTIS' };
+export const metadata: Metadata = { 
+  title: 'Explore Mentors — EVEKSH',
+  description: 'Connect with verified expert mentors across engineering, AI, product, and startups.'
+};
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 interface Expert {
   id: string;
   name: string;
-  profile?: { bio?: string; headline?: string; avatarUrl?: string; skills?: string[]; rating?: number; hourlyRate?: number };
+  profile?: { 
+    bio?: string; 
+    headline?: string; 
+    avatarUrl?: string; 
+    skills?: string[]; 
+    rating?: number; 
+    hourlyRate?: number;
+    isVerified?: boolean;
+  };
 }
 
 async function getExperts(): Promise<Expert[]> {
@@ -25,38 +35,28 @@ async function getExperts(): Promise<Expert[]> {
 }
 
 const MOCK_EXPERTS: Expert[] = [
-  { id: '1', name: 'Sarah Chen', profile: { headline: 'Ex-Google Staff Engineer', bio: 'Scaled systems to 100M users.', skills: ['System Design', 'Go', 'Kubernetes'], rating: 4.9, hourlyRate: 220 } },
-  { id: '2', name: 'Marcus Webb', profile: { headline: 'Fintech CTO & Angel Investor', bio: 'Built 3 fintech exits.', skills: ['Fundraising', 'Product', 'Fintech'], rating: 4.8, hourlyRate: 350 } },
-  { id: '3', name: 'Priya Patel', profile: { headline: 'ML Research Lead at Meta', bio: 'LLM specialist, 12 patents.', skills: ['AI/ML', 'Python', 'LLMs'], rating: 5.0, hourlyRate: 280 } },
-  { id: '4', name: 'Daniel Okafor', profile: { headline: 'Y Combinator Alumni (W22)', bio: 'Grew startup 0→$4M ARR.', skills: ['Startup', 'Growth', 'Sales'], rating: 4.7, hourlyRate: 180 } },
-  { id: '5', name: 'Elena Rossi', profile: { headline: 'Senior UX Lead at Figma', bio: 'Designed for 20M+ users.', skills: ['UX Design', 'Figma', 'Research'], rating: 4.9, hourlyRate: 160 } },
-  { id: '6', name: 'James Liu', profile: { headline: 'Blockchain Core Developer', bio: 'Built DeFi protocols with $1B TVL.', skills: ['Solidity', 'Web3', 'DeFi'], rating: 4.6, hourlyRate: 300 } },
-];
-
-const STATS = [
-  { label: 'Sessions', value: '0', icon: '📅', color: '#6366f1' },
-  { label: 'Hours Learned', value: '0h', icon: '⏱️', color: '#a855f7' },
-  { label: 'Experts Available', value: '500+', icon: '🧠', color: '#f472b6' },
-  { label: 'Avg. Rating', value: '4.9★', icon: '⭐', color: '#fbbf24' },
+  { id: '1', name: 'Sarah Chen', profile: { headline: 'Ex-Google Staff Infrastructure Engineer', bio: 'Scaled storage systems to 100M users. Distributed systems architect.', skills: ['System Design', 'Go', 'Kubernetes', 'Spanner'], rating: 4.97, hourlyRate: 220, isVerified: true } },
+  { id: '2', name: 'Marcus Webb', profile: { headline: 'Fintech CTO & 3x Founder (YC W19)', bio: 'Built and scaled 2 fintech exits. Specialized in zero-to-one and seed fundraising.', skills: ['Fundraising', 'Product Strategy', 'Fintech', 'Go-to-Market'], rating: 4.88, hourlyRate: 350, isVerified: true } },
+  { id: '3', name: 'Dr. Priya Patel', profile: { headline: 'AI Research Lead at Meta • LLM Architect', bio: 'Specialist in low-latency LLM inference, RAG pipelines, and model evaluation.', skills: ['AI/ML', 'Python', 'LLMs', 'PyTorch', 'Fine-tuning'], rating: 5.0, hourlyRate: 280, isVerified: true } },
+  { id: '4', name: 'Daniel Okafor', profile: { headline: 'YC Alum • Scaled B2B SaaS $0 to $4M ARR', bio: 'Enterprise sales leadership, customer retention, and B2B pricing model optimization.', skills: ['B2B SaaS', 'Growth', 'Enterprise Sales', 'Fundraising'], rating: 4.79, hourlyRate: 180, isVerified: true } },
+  { id: '5', name: 'Elena Rossi', profile: { headline: 'Principal Design Architect at Figma', bio: 'Built core multi-tenant design systems and spatial interfaces for 20M+ users.', skills: ['UX Architecture', 'Design Systems', 'Figma', 'User Research'], rating: 4.92, hourlyRate: 190, isVerified: true } },
+  { id: '6', name: 'James Liu', profile: { headline: 'Smart Contract Security Auditor', bio: 'Formally verified smart contracts securing over $1B in Total Value Locked.', skills: ['Solidity', 'Web3', 'Smart Contract Audits', 'Rust'], rating: 4.85, hourlyRate: 300, isVerified: true } },
 ];
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <span style={{ display: 'inline-flex', gap: 2 }}>
-      {[1,2,3,4,5].map(i => (
-        <span key={i} style={{ color: i <= Math.round(rating) ? '#fbbf24' : '#3f3f46', fontSize: '0.75rem' }}>★</span>
-      ))}
-      <span style={{ color: '#71717a', fontSize: '0.75rem', marginLeft: 4 }}>{rating.toFixed(1)}</span>
-    </span>
+    <div className="flex items-center gap-1 text-[11px] text-zinc-400 font-mono">
+      <span className="text-amber-400 font-bold">★</span>
+      <span className="text-zinc-200 font-semibold">{rating.toFixed(2)}</span>
+    </div>
   );
 }
 
-function AvatarPlaceholder({ name, size = 52 }: { name: string; size?: number }) {
-  const colors = ['#6366f1','#a855f7','#f472b6','#06b6d4','#10b981','#f59e0b'];
-  const color = colors[name.charCodeAt(0) % colors.length];
+function AvatarInitials({ name }: { name: string }) {
+  const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
   return (
-    <div style={{ width: size, height: size, borderRadius: '50%', background: `linear-gradient(135deg, ${color}, ${color}99)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: size * 0.38, fontWeight: 700, color: '#fff', flexShrink: 0 }}>
-      {name.charAt(0).toUpperCase()}
+    <div className="w-11 h-11 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-100 flex-shrink-0">
+      {initials}
     </div>
   );
 }
@@ -64,34 +64,76 @@ function AvatarPlaceholder({ name, size = 52 }: { name: string; size?: number })
 function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
   const p = expert.profile;
   return (
-    <div className="glass-panel card-hover" style={{ borderRadius: '1.25rem', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-        {p?.avatarUrl
-          ? <img src={p.avatarUrl} alt={expert.name} style={{ width: 52, height: 52, borderRadius: '50%', objectFit: 'cover' }} />
-          : <AvatarPlaceholder name={expert.name} />
-        }
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontWeight: 700, color: '#fafafa', fontSize: '1rem', marginBottom: '0.15rem' }}>{expert.name}</p>
-          <p style={{ color: '#71717a', fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p?.headline}</p>
-          {p?.rating && <div style={{ marginTop: '0.25rem' }}><StarRating rating={p.rating} /></div>}
+    <div className="bento-card p-5 flex flex-col justify-between space-y-4">
+      <div className="space-y-3">
+        {/* Top Info Header */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            {p?.avatarUrl ? (
+              <img src={p.avatarUrl} alt={expert.name} className="w-11 h-11 rounded-xl object-cover border border-zinc-800 flex-shrink-0" />
+            ) : (
+              <AvatarInitials name={expert.name} />
+            )}
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h3 className="font-bold text-sm text-white truncate">{expert.name}</h3>
+                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.2 rounded border border-emerald-500/20">VERIFIED</span>
+              </div>
+              <p className="text-xs text-zinc-400 truncate mt-0.5">{p?.headline}</p>
+            </div>
+          </div>
+
+          {p?.hourlyRate && (
+            <div className="text-right flex-shrink-0">
+              <div className="text-base font-extrabold text-white tracking-tight">${p.hourlyRate}</div>
+              <div className="text-[10px] font-mono text-zinc-500 uppercase">/ hr</div>
+            </div>
+          )}
         </div>
-        {p?.hourlyRate && (
-          <div style={{ textAlign: 'right', flexShrink: 0 }}>
-            <span style={{ fontSize: '1.15rem', fontWeight: 800, color: '#fafafa' }}>${p.hourlyRate}</span>
-            <span style={{ fontSize: '0.72rem', color: '#71717a', display: 'block' }}>/hr</span>
+
+        {/* Bio Preview */}
+        {p?.bio && (
+          <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
+            {p.bio}
+          </p>
+        )}
+
+        {/* Skill Chips */}
+        {p?.skills && p.skills.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {p.skills.slice(0, 4).map((s) => (
+              <span key={s} className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-900 text-zinc-400 border border-zinc-800">
+                {s}
+              </span>
+            ))}
           </div>
         )}
       </div>
 
-      {p?.skills && p.skills.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-          {p.skills.slice(0, 4).map(s => <span key={s} className="skill-chip">{s}</span>)}
+      {/* Action Footer */}
+      <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          {p?.rating && <StarRating rating={p.rating} />}
+          <span className="text-[11px] text-zinc-500">·</span>
+          <span className="text-[11px] text-zinc-400 flex items-center gap-1">
+            <span className="status-dot"></span> Available
+          </span>
         </div>
-      )}
 
-      <div style={{ display: 'flex', gap: '0.6rem', marginTop: '0.25rem' }}>
-        <a href={`/${locale}/experts/${expert.id}`} className="btn-ghost" style={{ flex: 1, fontSize: '0.8rem', padding: '0.55rem 0.75rem', textAlign: 'center', textDecoration: 'none' }}>View Profile</a>
-        <a href={`/${locale}/book?expert=${expert.id}`} className="btn-primary" style={{ flex: 1, fontSize: '0.8rem', padding: '0.55rem 0.75rem', textAlign: 'center', textDecoration: 'none' }}>Book Session</a>
+        <div className="flex items-center gap-2">
+          <a
+            href={`/${locale}/experts/${expert.id}`}
+            className="btn-midday-secondary text-xs py-1.5 px-3"
+          >
+            Profile
+          </a>
+          <a
+            href={`/${locale}/book?expert=${expert.id}`}
+            className="btn-midday-primary text-xs py-1.5 px-3.5"
+          >
+            Book
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -103,49 +145,50 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
   const experts = await getExperts();
 
   return (
-    <div style={{ minHeight: '100vh', background: '#09090b', color: '#fafafa' }}>
+    <div className="min-h-screen bg-[#09090b] text-[#fafafa] relative">
       <Navbar locale={locale} />
 
-      <main style={{ maxWidth: 1280, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
-        {/* Header */}
-        <div className="animate-fade-in-up" style={{ marginBottom: '2.5rem' }}>
-          <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '0.5rem' }}>
-            Your <span className="gradient-text">Dashboard</span>
-          </h1>
-          <p style={{ color: '#71717a', fontSize: '1rem' }}>Find the perfect mentor for your next breakthrough.</p>
-        </div>
-
-        {/* Stats */}
-        <div className="animate-fade-in-up-delay-1" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2.5rem' }}>
-          {STATS.map((s) => (
-            <div key={s.label} className="glass-panel" style={{ borderRadius: '1rem', padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ width: 44, height: 44, borderRadius: '0.75rem', background: `${s.color}20`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem' }}>{s.icon}</div>
-              <div>
-                <p style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fafafa', lineHeight: 1 }}>{s.value}</p>
-                <p style={{ fontSize: '0.78rem', color: '#71717a', marginTop: '0.2rem' }}>{s.label}</p>
-              </div>
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-white/[0.06] pb-6">
+          <div>
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1.5">
+              <span>EVEKSH DIRECTORY</span>
+              <span>·</span>
+              <span className="text-zinc-300">500+ VERIFIED MENTORS</span>
             </div>
-          ))}
-        </div>
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-white">
+              Explore Mentors
+            </h1>
+            <p className="text-zinc-400 text-xs sm:text-sm mt-1">
+              Direct access to verified tech leaders, AI researchers, and startup founders.
+            </p>
+          </div>
 
-        {/* Search */}
-        <div className="animate-fade-in-up-delay-2" style={{ marginBottom: '2.5rem' }}>
-          <SearchBar locale={locale} />
-        </div>
-
-        {/* Expert Grid */}
-        <div className="animate-fade-in-up-delay-3">
-          <h2 style={{ fontSize: '1.3rem', fontWeight: 700, marginBottom: '1.25rem', color: '#fafafa' }}>
-            Featured Experts
-            <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#71717a', fontWeight: 400 }}>{experts.length} available</span>
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem', marginBottom: '4rem' }}>
-            {experts.map((expert) => <ExpertCard key={expert.id} expert={expert} locale={locale} />)}
+          <div className="flex items-center gap-2">
+            <span className="kbd">⌘K</span>
+            <span className="text-xs text-zinc-500 font-mono">Quick search</span>
           </div>
         </div>
 
-        {/* Charts */}
-        <DashboardCharts />
+        {/* Command Search Bar */}
+        <div className="mb-8">
+          <SearchBar locale={locale} />
+        </div>
+
+        {/* Directory Grid */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between text-xs font-mono uppercase text-zinc-400">
+            <span>AVAILABLE EXPERTS ({experts.length})</span>
+            <span>SORTED BY RELEVANCE</span>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {experts.map((expert) => (
+              <ExpertCard key={expert.id} expert={expert} locale={locale} />
+            ))}
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -14,24 +14,24 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'MANTIS — Stop guessing, start talking.',
-    template: '%s | MANTIS',
+    default: 'EVEKSH — Stop guessing, start talking.',
+    template: '%s | EVEKSH',
   },
   description:
-    'Connect instantly with vetted industry veterans and PhD researchers. Get the 1-on-1 mentorship you need to break through your blockers.',
-  keywords: ['mentorship', 'mentor', 'learning', 'career', 'expert', 'coaching', 'online mentor'],
-  authors: [{ name: 'MANTIS', url: 'https://mantis.com' }],
+    'Direct 1-on-1 on-demand access to vetted engineering leaders, AI researchers, and startup founders. Zero risk with Stripe Escrow protection.',
+  keywords: ['mentorship', 'mentor', 'engineering', 'startups', 'architecture', 'expert', 'eveksh'],
+  authors: [{ name: 'EVEKSH', url: 'https://eveksh.com' }],
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   openGraph: {
     type: 'website',
-    siteName: 'MANTIS',
-    title: 'MANTIS — Stop guessing, start talking.',
-    description: 'Connect with expert mentors. 1-on-1 live mentorship sessions with escrow payments.',
+    siteName: 'EVEKSH',
+    title: 'EVEKSH — Stop guessing, start talking.',
+    description: 'Direct 1-on-1 live mentorship sessions with escrow payments.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'MANTIS — Stop guessing, start talking.',
-    description: 'Connect with expert mentors.',
+    title: 'EVEKSH — Stop guessing, start talking.',
+    description: 'Connect with expert mentors on EVEKSH.',
   },
 };
 

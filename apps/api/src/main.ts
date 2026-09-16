@@ -65,9 +65,9 @@ async function bootstrap() {
 
   // Swagger API documentation
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('MANTIS API')
+    .setTitle('EVEKSH API')
     .setDescription(
-      'The MANTIS Mentorship Marketplace API — Stop guessing, start talking.\n\n' +
+      'The EVEKSH Mentorship Marketplace API — Stop guessing, start talking.\n\n' +
       'Authenticate with the Bearer token returned from POST /auth/login or POST /auth/register.',
     )
     .setVersion('2.0.0')
@@ -93,7 +93,7 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
     options: {
-      package: 'mantis',
+      package: 'eveksh',
       protoPath: join(process.cwd(), 'src/proto/mantis.proto'),
       url: '0.0.0.0:50051',
     },
@@ -103,7 +103,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3001);
 
   const url = `http://localhost:${process.env.PORT ?? 3001}`;
-  console.log(`\n🚀 MANTIS API running at: ${url}`);
+  console.log(`\n🚀 EVEKSH API running at: ${url}`);
   console.log(`📚 Swagger docs: ${url}/api/docs`);
   console.log(`⚡ gRPC server: 0.0.0.0:50051\n`);
 }

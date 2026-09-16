@@ -45,7 +45,7 @@ export default function ProfilePage() {
       <main style={{ maxWidth: 760, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
         <div className="animate-fade-in-up" style={{ marginBottom: '2rem' }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Edit <span className="gradient-text">Profile</span></h1>
-          <p style={{ color: '#71717a', marginTop: '0.4rem' }}>How the world sees you on MANTIS.</p>
+          <p style={{ color: '#71717a', marginTop: '0.4rem' }}>How the world sees you on EVEKSH.</p>
         </div>
 
         {/* Avatar */}
