@@ -89,7 +89,7 @@ function HomePageClient({ locale }: { locale: string }) {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-[#09090b] relative">
+    <div className="min-h-screen text-[#16140f] relative" style={{ backgroundColor: '#fbfbfa', fontFamily: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif" }}>
       <Navbar locale={locale} />
 
       {/* ── Hero Section ── */}

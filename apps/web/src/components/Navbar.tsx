@@ -12,189 +12,224 @@ export function Navbar({ locale }: NavbarProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 10);
+    const handler = () => setScrolled(window.scrollY > 8);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  const isActive = (path: string) => pathname.includes(path);
-
   return (
     <>
       <header
-        className="w-full fixed top-0 left-0 right-0 z-50 transition-all duration-200"
+        className="w-full fixed top-0 left-0 right-0 z-50 transition-colors duration-150"
         style={{
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.96)' : '#ffffff',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          borderBottom: '1px solid #e4e4e7',
+          backgroundColor: '#fbfbfa',
+          borderBottom: '1px solid #eeece6',
+          fontFamily: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
         }}
       >
-        {/* Top bar desktop layout (inspired by Y Combinator navbar) */}
-        <div className="max-w-[1400px] mx-auto px-5 h-[64px] flex items-center justify-between relative">
+        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-8 h-[68px] flex items-center justify-between relative">
           
-          {/* Left Navigation Links with YC-style dropdowns */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1">
-            {/* Explore Mentors Dropdown */}
+          {/* ── Left Navigation Links (About, Companies, Library) ── */}
+          <div className="hidden lg:flex items-center gap-7 text-[#16140f] text-[13.5px] font-normal tracking-[0.2px]">
+            
+            {/* About Dropdown */}
             <div
-              className="relative"
-              onMouseEnter={() => setOpenDropdown('mentors')}
-              onMouseLeave={() => setOpenDropdown(null)}
-            >
-              <Link
-                href={`/${locale}/dashboard`}
-                className={`inline-flex items-center gap-1.5 text-[14px] font-medium transition-colors ${
-                  isActive('dashboard') ? 'text-zinc-950 font-semibold' : 'text-zinc-700 hover:text-zinc-950'
-                }`}
-              >
-                <span>Explore</span>
-                <svg className="w-3 h-3 text-zinc-500 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-
-              {openDropdown === 'mentors' && (
-                <div className="absolute left-0 top-full pt-2 w-56 animate-fade-in">
-                  <div className="bg-white border border-zinc-200 rounded-xl shadow-lg p-2 flex flex-col gap-1">
-                    <Link
-                      href={`/${locale}/dashboard`}
-                      className="px-3 py-2 text-[13px] text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
-                    >
-                      Top Rated Mentors
-                    </Link>
-                    <Link
-                      href={`/${locale}/dashboard`}
-                      className="px-3 py-2 text-[13px] text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
-                    >
-                      Engineering & System Design
-                    </Link>
-                    <Link
-                      href={`/${locale}/dashboard`}
-                      className="px-3 py-2 text-[13px] text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
-                    >
-                      AI & Machine Learning
-                    </Link>
-                    <Link
-                      href={`/${locale}/dashboard`}
-                      className="px-3 py-2 text-[13px] text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
-                    >
-                      Startup Founders & CTOs
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Sessions / Appointments */}
-            <Link
-              href={`/${locale}/appointments`}
-              className={`text-[14px] font-medium transition-colors ${
-                isActive('appointments') ? 'text-zinc-950 font-semibold' : 'text-zinc-700 hover:text-zinc-950'
-              }`}
-            >
-              Sessions
-            </Link>
-
-            {/* Messages */}
-            <Link
-              href={`/${locale}/messages`}
-              className={`text-[14px] font-medium transition-colors ${
-                isActive('messages') ? 'text-zinc-950 font-semibold' : 'text-zinc-700 hover:text-zinc-950'
-              }`}
-            >
-              Messages
-            </Link>
-          </div>
-
-          {/* Centered YC-Style Brand Badge & Wordmark */}
-          <div className="flex items-center justify-center">
-            <Link
-              href={`/${locale}`}
-              className="flex items-center gap-2.5 text-zinc-950 no-underline group"
-              title="EVEKSH"
-            >
-              {/* Square monochromatic logo block like YC's square */}
-              <div className="w-[36px] h-[36px] bg-zinc-950 text-white rounded-lg flex items-center justify-center font-black text-[17px] tracking-tighter group-hover:bg-zinc-800 transition-colors shadow-sm">
-                E
-              </div>
-              <span className="font-extrabold text-[15px] tracking-[0.18em] text-zinc-950 uppercase hidden sm:inline-block">
-                EVEKSH
-              </span>
-            </Link>
-          </div>
-
-          {/* Right Navigation & Action Items */}
-          <div className="flex items-center justify-end gap-5 flex-1">
-            {/* Resources dropdown for desktop */}
-            <div
-              className="relative hidden lg:block"
-              onMouseEnter={() => setOpenDropdown('resources')}
-              onMouseLeave={() => setOpenDropdown(null)}
+              className="relative py-4"
+              onMouseEnter={() => setActiveDropdown('about')}
+              onMouseLeave={() => setActiveDropdown(null)}
             >
               <button
                 type="button"
-                className="inline-flex items-center gap-1.5 text-[14px] font-medium text-zinc-700 hover:text-zinc-950 transition-colors"
+                className="inline-flex items-center gap-1 hover:opacity-60 transition-opacity cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
               >
-                <span>Resources</span>
-                <svg className="w-3 h-3 text-zinc-500 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <span>About</span>
+                <svg className="w-2.5 h-2.5 opacity-70 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
                 </svg>
               </button>
 
-              {openDropdown === 'resources' && (
-                <div className="absolute right-0 top-full pt-2 w-52 animate-fade-in">
-                  <div className="bg-white border border-zinc-200 rounded-xl shadow-lg p-2 flex flex-col gap-1">
-                    <Link
-                      href={`/${locale}/dashboard`}
-                      className="px-3 py-2 text-[13px] text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
-                    >
-                      How Mentorship Works
+              {activeDropdown === 'about' && (
+                <div className="absolute left-0 top-full pt-1 w-52 animate-fade-in">
+                  <div className="bg-[#fbfbfa] border border-[#eeece6] rounded-xl shadow-lg p-2 flex flex-col gap-1 text-[13px]">
+                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      What Happens at EVEKSH?
                     </Link>
-                    <Link
-                      href={`/${locale}/session`}
-                      className="px-3 py-2 text-[13px] text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
-                    >
-                      Live Session Demo
+                    <Link href={`/${locale}/register`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Apply as Mentor
                     </Link>
-                    <Link
-                      href={`/${locale}/admin`}
-                      className="px-3 py-2 text-[13px] text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
-                    >
-                      Admin Portal
+                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Interview Guide & FAQ
+                    </Link>
+                    <Link href={`/${locale}/admin`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Community & People
                     </Link>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Login Link */}
-            <Link
-              href={`/${locale}/login`}
-              className="text-[14px] font-medium text-zinc-800 hover:text-zinc-950 transition-colors"
+            {/* Companies / Experts Dropdown */}
+            <div
+              className="relative py-4"
+              onMouseEnter={() => setActiveDropdown('companies')}
+              onMouseLeave={() => setActiveDropdown(null)}
             >
-              Log in
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 hover:opacity-60 transition-opacity cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
+              >
+                <span>Companies</span>
+                <svg className="w-2.5 h-2.5 opacity-70 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
+                </svg>
+              </button>
+
+              {activeDropdown === 'companies' && (
+                <div className="absolute left-0 top-full pt-1 w-52 animate-fade-in">
+                  <div className="bg-[#fbfbfa] border border-[#eeece6] rounded-xl shadow-lg p-2 flex flex-col gap-1 text-[13px]">
+                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Startup Directory
+                    </Link>
+                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Founder Directory
+                    </Link>
+                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Launch YC Batch
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Library link */}
+            <Link
+              href={`/${locale}/dashboard`}
+              className="hover:opacity-60 transition-opacity"
+            >
+              Library
+            </Link>
+          </div>
+
+          {/* ── Centerpiece Iconic Orange Square Logo ── */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <Link
+              href={`/${locale}`}
+              className="inline-block transition-transform hover:scale-[1.03]"
+              title="Y Combinator"
+            >
+              <div
+                className="w-[42px] h-[42px] rounded-[1px] flex items-center justify-center shadow-sm"
+                style={{ backgroundColor: '#FF6600' }}
+              >
+                <span
+                  style={{
+                    color: '#ffffff',
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 700,
+                    fontSize: '25px',
+                    lineHeight: 1,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  Y
+                </span>
+              </div>
+            </Link>
+          </div>
+
+          {/* ── Right Navigation Links & Action Buttons ── */}
+          <div className="hidden lg:flex items-center gap-7 text-[#16140f] text-[13.5px] font-normal tracking-[0.2px]">
+            
+            {/* Partners */}
+            <Link
+              href={`/${locale}/dashboard`}
+              className="hover:opacity-60 transition-opacity"
+            >
+              Partners
             </Link>
 
-            {/* YC-style rounded pill CTA button */}
+            {/* Resources Dropdown */}
+            <div
+              className="relative py-4"
+              onMouseEnter={() => setActiveDropdown('resources')}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 hover:opacity-60 transition-opacity cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
+              >
+                <span>Resources</span>
+                <svg className="w-2.5 h-2.5 opacity-70 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
+                </svg>
+              </button>
+
+              {activeDropdown === 'resources' && (
+                <div className="absolute right-0 top-full pt-1 w-56 animate-fade-in">
+                  <div className="bg-[#fbfbfa] border border-[#eeece6] rounded-xl shadow-lg p-2 flex flex-col gap-1 text-[13px]">
+                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Startup School
+                    </Link>
+                    <Link href={`/${locale}/messages`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Hacker News
+                    </Link>
+                    <Link href={`/${locale}/appointments`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      Find a Co-Founder
+                    </Link>
+                    <Link href={`/${locale}/session`} className="px-3 py-2 text-[#16140f] hover:bg-[#eeece6] rounded-lg transition-colors">
+                      SAFE Financing Docs
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Startup Jobs */}
+            <Link
+              href={`/${locale}/dashboard`}
+              className="hover:opacity-60 transition-opacity mr-2"
+            >
+              Startup Jobs
+            </Link>
+
+            {/* User Profile Avatar Pill (Circle with H as shown in screenshot) */}
+            <Link
+              href={`/${locale}/profile`}
+              className="w-[34px] h-[34px] rounded-full border border-[#16140f]/20 flex items-center justify-center text-[12px] font-medium text-[#16140f] hover:border-[#16140f] transition-colors"
+              title="Profile"
+            >
+              H
+            </Link>
+
+            {/* Black Italic Serif Pill 'Apply' Button */}
             <Link
               href={`/${locale}/register`}
-              className="hidden sm:inline-flex items-center justify-center h-[38px] px-5 rounded-full bg-zinc-950 hover:bg-zinc-800 text-white text-[13.5px] font-medium transition-all shadow-sm"
+              className="inline-flex items-center justify-center h-[38px] px-5 rounded-full bg-black text-white text-[13px] transition-opacity hover:opacity-85 shadow-sm"
               style={{
-                fontFamily: "Georgia, Cambria, 'Times New Roman', Times, serif",
+                fontFamily: "'Source Serif 4', Georgia, serif",
                 fontStyle: 'italic',
-                letterSpacing: '0.015em',
+                fontWeight: 400,
+                letterSpacing: '0.015rem',
               }}
             >
-              Apply as Mentor
+              Apply
             </Link>
+          </div>
 
-            {/* Mobile Menu Toggle Button */}
+          {/* ── Mobile View Controls ── */}
+          <div className="lg:hidden flex items-center gap-3">
+            <Link
+              href={`/${locale}/profile`}
+              className="w-[32px] h-[32px] rounded-full border border-[#16140f]/20 flex items-center justify-center text-[11px] font-medium text-[#16140f]"
+            >
+              H
+            </Link>
             <button
               type="button"
-              className="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-zinc-200 text-zinc-900 bg-white hover:bg-zinc-50"
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#eeece6] text-[#16140f] bg-[#fbfbfa]"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle navigation menu"
             >
@@ -211,56 +246,45 @@ export function Navbar({ locale }: NavbarProps) {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* ── Mobile Menu Dropdown ── */}
         {menuOpen && (
-          <div className="lg:hidden bg-white border-b border-zinc-200 px-5 py-4 flex flex-col gap-3 shadow-lg">
-            <Link
-              href={`/${locale}/dashboard`}
-              onClick={() => setMenuOpen(false)}
-              className="px-3 py-2 text-sm font-medium text-zinc-800 hover:bg-zinc-100 rounded-lg"
-            >
-              Explore Mentors
+          <div className="lg:hidden bg-[#fbfbfa] border-b border-[#eeece6] px-6 py-4 flex flex-col gap-2.5 text-[14px]">
+            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#16140f] border-b border-[#eeece6]/60">
+              About
             </Link>
-            <Link
-              href={`/${locale}/appointments`}
-              onClick={() => setMenuOpen(false)}
-              className="px-3 py-2 text-sm font-medium text-zinc-800 hover:bg-zinc-100 rounded-lg"
-            >
-              Sessions & Appointments
+            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#16140f] border-b border-[#eeece6]/60">
+              Companies
             </Link>
-            <Link
-              href={`/${locale}/messages`}
-              onClick={() => setMenuOpen(false)}
-              className="px-3 py-2 text-sm font-medium text-zinc-800 hover:bg-zinc-100 rounded-lg"
-            >
-              Messages
+            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#16140f] border-b border-[#eeece6]/60">
+              Library
             </Link>
-            <Link
-              href={`/${locale}/admin`}
-              onClick={() => setMenuOpen(false)}
-              className="px-3 py-2 text-sm font-medium text-zinc-800 hover:bg-zinc-100 rounded-lg"
-            >
-              Admin Portal
+            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#16140f] border-b border-[#eeece6]/60">
+              Partners
             </Link>
-
-            <div className="pt-3 border-t border-zinc-200 flex flex-col gap-2">
+            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#16140f] border-b border-[#eeece6]/60">
+              Resources
+            </Link>
+            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#16140f] border-b border-[#eeece6]/60">
+              Startup Jobs
+            </Link>
+            <div className="pt-2 flex items-center justify-between gap-3">
               <Link
                 href={`/${locale}/login`}
                 onClick={() => setMenuOpen(false)}
-                className="w-full text-center py-2 text-sm font-medium border border-zinc-200 rounded-xl text-zinc-800 hover:bg-zinc-50"
+                className="flex-1 text-center py-2 text-sm text-[#16140f] border border-[#eeece6] rounded-xl bg-white"
               >
                 Log in
               </Link>
               <Link
                 href={`/${locale}/register`}
                 onClick={() => setMenuOpen(false)}
-                className="w-full text-center py-2 text-sm font-medium bg-zinc-950 text-white rounded-xl hover:bg-zinc-800"
+                className="flex-1 text-center py-2 text-sm bg-black text-white rounded-full"
                 style={{
-                  fontFamily: "Georgia, Cambria, 'Times New Roman', Times, serif",
+                  fontFamily: "'Source Serif 4', Georgia, serif",
                   fontStyle: 'italic',
                 }}
               >
-                Apply as Mentor
+                Apply
               </Link>
             </div>
           </div>
