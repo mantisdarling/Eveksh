@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -8,290 +8,374 @@ interface NavbarProps {
   locale: string;
 }
 
+const NAV_ITEMS = [
+  {
+    label: 'Experts',
+    key: 'experts',
+    href: null as string | null,
+    panel: [
+      {
+        heading: 'Find Mentors',
+        links: [
+          { label: 'Browse Directory', href: '/dashboard', desc: 'Explore all expert mentors' },
+          { label: 'Top Rated', href: '/dashboard', desc: 'Highest reviewed sessions' },
+          { label: 'Featured Picks', href: '/dashboard', desc: 'Curated by our team' },
+        ],
+      },
+      {
+        heading: 'By Category',
+        links: [
+          { label: 'Engineering & Tech', href: '/dashboard', desc: 'System design, backend, cloud' },
+          { label: 'Product & Growth', href: '/dashboard', desc: 'PM strategy, GTM, analytics' },
+          { label: 'Startups & Fundraising', href: '/dashboard', desc: 'Pitch decks, VC intros' },
+        ],
+      },
+    ] as { heading: string; links: { label: string; href: string; desc: string }[] }[] | null,
+  },
+  {
+    label: 'Sessions',
+    key: 'sessions',
+    href: null as string | null,
+    panel: [
+      {
+        heading: 'Your Sessions',
+        links: [
+          { label: 'Book a Session', href: '/book', desc: 'Schedule time with a mentor' },
+          { label: 'My Appointments', href: '/appointments', desc: 'View upcoming sessions' },
+          { label: 'Live Room', href: '/session', desc: 'Join your active session' },
+        ],
+      },
+      {
+        heading: 'How it Works',
+        links: [
+          { label: 'Escrow Payment', href: '/dashboard', desc: 'Funds held until session ends' },
+          { label: 'Video & Chat', href: '/messages', desc: 'Real-time collaboration' },
+        ],
+      },
+    ] as { heading: string; links: { label: string; href: string; desc: string }[] }[] | null,
+  },
+  { label: 'Messages', key: 'messages', href: '/messages', panel: null },
+  { label: 'Discover', key: 'discover', href: '/dashboard', panel: null },
+];
+
 export function Navbar({ locale }: NavbarProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activePanel, setActivePanel] = useState<string | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 8);
+    const handler = () => setScrolled(window.scrollY > 12);
     window.addEventListener('scroll', handler, { passive: true });
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  function handleEnter(key: string) {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setActivePanel(key);
+  }
+
+  function handleLeave() {
+    closeTimer.current = setTimeout(() => setActivePanel(null), 120);
+  }
+
+  const currentPanel = NAV_ITEMS.find(i => i.key === activePanel && i.panel);
+
   return (
     <>
-      <header
-        className="w-full fixed top-0 left-0 right-0 z-50 transition-colors duration-150"
-        style={{
-          backgroundColor: '#37353E',
-          borderBottom: '1px solid rgba(211, 218, 217, 0.12)',
-          fontFamily: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
-        }}
+      <div
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center"
+        style={{ padding: scrolled ? '8px 16px' : '12px 16px', transition: 'padding 0.3s ease' }}
       >
-        <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-8 h-[68px] flex items-center justify-between relative">
-          
-          {/* ── Left Navigation Links (About, Companies, Library) ── */}
-          <div className="hidden lg:flex items-center gap-7 text-[#D3DAD9] text-[13.5px] font-normal tracking-[0.2px]">
-            
-            {/* About Dropdown */}
-            <div
-              className="relative py-4"
-              onMouseEnter={() => setActiveDropdown('about')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button
-                type="button"
-                className="inline-flex items-center gap-1 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
+        <div
+          style={{
+            background: '#37353E',
+            border: '1px solid rgba(211,218,217,0.16)',
+            borderRadius: scrolled ? '9999px' : '20px',
+            boxShadow: scrolled
+              ? '0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3)'
+              : '0 4px 20px rgba(0,0,0,0.3)',
+            transition: 'border-radius 0.35s ease, box-shadow 0.35s ease',
+            width: '100%',
+            maxWidth: 1060,
+            fontFamily: "'Outfit', -apple-system, BlinkMacSystemFont, sans-serif",
+            position: 'relative',
+          }}
+          onMouseLeave={handleLeave}
+        >
+          {/* 3-column grid toolbar */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr auto 1fr',
+              alignItems: 'center',
+              height: 52,
+              padding: '0 10px',
+            }}
+          >
+            {/* LEFT: Logo */}
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Link
+                href={`/${locale}`}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 9, textDecoration: 'none', paddingLeft: 6 }}
               >
-                <span>About</span>
-                <svg className="w-2.5 h-2.5 opacity-70 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
-                </svg>
-              </button>
-
-              {activeDropdown === 'about' && (
-                <div className="absolute left-0 top-full pt-1 w-56 animate-fade-in">
-                  <div className="bg-[#44444E] border border-[rgba(211,218,217,0.16)] rounded-xl shadow-2xl p-2 flex flex-col gap-1 text-[13px]">
-                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      What Happens at EVEKSH?
-                    </Link>
-                    <Link href={`/${locale}/register`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Apply as Mentor
-                    </Link>
-                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Interview Guide & FAQ
-                    </Link>
-                    <Link href={`/${locale}/admin`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Community & People
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Companies / Experts Dropdown */}
-            <div
-              className="relative py-4"
-              onMouseEnter={() => setActiveDropdown('companies')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button
-                type="button"
-                className="inline-flex items-center gap-1 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
-              >
-                <span>Companies</span>
-                <svg className="w-2.5 h-2.5 opacity-70 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
-                </svg>
-              </button>
-
-              {activeDropdown === 'companies' && (
-                <div className="absolute left-0 top-full pt-1 w-56 animate-fade-in">
-                  <div className="bg-[#44444E] border border-[rgba(211,218,217,0.16)] rounded-xl shadow-2xl p-2 flex flex-col gap-1 text-[13px]">
-                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Startup Directory
-                    </Link>
-                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Founder Directory
-                    </Link>
-                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Launch Batch
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Library link */}
-            <Link
-              href={`/${locale}/dashboard`}
-              className="hover:text-white transition-colors"
-            >
-              Library
-            </Link>
-          </div>
-
-          {/* ── Centerpiece Signature Brand Mark ── */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-            <Link
-              href={`/${locale}`}
-              className="inline-block transition-transform hover:scale-[1.03]"
-              title="EVEKSH"
-            >
-              <div
-                className="w-[42px] h-[42px] rounded-[6px] flex items-center justify-center shadow-lg border border-[rgba(211,218,217,0.2)]"
-                style={{ backgroundColor: '#715A5A' }}
-              >
-                <span
+                <div
                   style={{
-                    color: '#D3DAD9',
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 800,
-                    fontSize: '23px',
-                    lineHeight: 1,
-                    letterSpacing: '-0.02em',
+                    width: 32,
+                    height: 32,
+                    borderRadius: 7,
+                    background: '#715A5A',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid rgba(211,218,217,0.2)',
+                    flexShrink: 0,
                   }}
                 >
-                  E
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* ── Right Navigation Links & Action Buttons ── */}
-          <div className="hidden lg:flex items-center gap-7 text-[#D3DAD9] text-[13.5px] font-normal tracking-[0.2px]">
-            
-            {/* Partners */}
-            <Link
-              href={`/${locale}/dashboard`}
-              className="hover:text-white transition-colors"
-            >
-              Partners
-            </Link>
-
-            {/* Resources Dropdown */}
-            <div
-              className="relative py-4"
-              onMouseEnter={() => setActiveDropdown('resources')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button
-                type="button"
-                className="inline-flex items-center gap-1 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0 text-inherit font-inherit"
-              >
-                <span>Resources</span>
-                <svg className="w-2.5 h-2.5 opacity-70 mt-[1px]" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-                  <path d="M6 8L10 12L14 8" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter" />
-                </svg>
-              </button>
-
-              {activeDropdown === 'resources' && (
-                <div className="absolute right-0 top-full pt-1 w-56 animate-fade-in">
-                  <div className="bg-[#44444E] border border-[rgba(211,218,217,0.16)] rounded-xl shadow-2xl p-2 flex flex-col gap-1 text-[13px]">
-                    <Link href={`/${locale}/dashboard`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Startup Mentorship
-                    </Link>
-                    <Link href={`/${locale}/messages`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Direct Messaging
-                    </Link>
-                    <Link href={`/${locale}/appointments`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      My Appointments
-                    </Link>
-                    <Link href={`/${locale}/session`} className="px-3 py-2 text-[#D3DAD9] hover:bg-[#715A5A]/30 hover:text-white rounded-lg transition-colors">
-                      Live Video Room
-                    </Link>
-                  </div>
+                  <span style={{ color: '#D3DAD9', fontWeight: 800, fontSize: 17, lineHeight: 1, letterSpacing: '-0.03em' }}>
+                    E
+                  </span>
                 </div>
-              )}
+                <span
+                  className="hidden sm:inline"
+                  style={{ color: '#D3DAD9', fontWeight: 700, fontSize: 15.5, letterSpacing: '-0.025em' }}
+                >
+                  EVEKSH
+                </span>
+              </Link>
             </div>
 
-            {/* Startup Jobs */}
-            <Link
-              href={`/${locale}/dashboard`}
-              className="hover:text-white transition-colors mr-2"
-            >
-              Startup Jobs
-            </Link>
+            {/* CENTER: Nav links */}
+            <nav className="hidden lg:flex" style={{ alignItems: 'center', gap: 2 }}>
+              {NAV_ITEMS.map(item => {
+                const isActive = item.href ? pathname.startsWith(`/${locale}${item.href}`) : false;
+                const isPanelOpen = activePanel === item.key;
+                const sharedStyle: React.CSSProperties = {
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 5,
+                  height: 34,
+                  padding: '0 14px',
+                  borderRadius: 9999,
+                  fontSize: 13.5,
+                  fontWeight: 500,
+                  letterSpacing: '-0.01em',
+                  transition: 'all 0.15s ease',
+                  color: isActive || isPanelOpen ? '#D3DAD9' : 'rgba(211,218,217,0.72)',
+                  background: isActive || isPanelOpen ? 'rgba(211,218,217,0.1)' : 'transparent',
+                };
 
-            {/* User Profile Avatar Pill */}
-            <Link
-              href={`/${locale}/profile`}
-              className="w-[34px] h-[34px] rounded-full border border-[rgba(211,218,217,0.25)] bg-[#44444E] flex items-center justify-center text-[12px] font-medium text-[#D3DAD9] hover:border-[#D3DAD9] transition-colors"
-              title="Profile"
-            >
-              H
-            </Link>
+                return (
+                  <div key={item.key}>
+                    {item.href ? (
+                      <Link
+                        href={`/${locale}${item.href}`}
+                        style={{ ...sharedStyle, textDecoration: 'none' }}
+                        onMouseEnter={() => handleEnter(item.key)}
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <button
+                        type="button"
+                        style={{ ...sharedStyle, border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
+                        onMouseEnter={() => handleEnter(item.key)}
+                      >
+                        {item.label}
+                        <svg
+                          width="10" height="10" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                          style={{
+                            opacity: 0.55,
+                            transform: isPanelOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.2s ease',
+                          }}
+                        >
+                          <path d="M6 8L10 12L14 8" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
 
-            {/* Rose Accent Pill 'Apply' Button */}
-            <Link
-              href={`/${locale}/register`}
-              className="inline-flex items-center justify-center h-[38px] px-5 rounded-full text-[#D3DAD9] text-[13px] transition-all shadow-md hover:bg-[#846a6a] hover:text-white"
-              style={{
-                backgroundColor: '#715A5A',
-                border: '1px solid rgba(211, 218, 217, 0.2)',
-                fontFamily: "'Source Serif 4', Georgia, serif",
-                fontStyle: 'italic',
-                fontWeight: 400,
-                letterSpacing: '0.015rem',
-              }}
-            >
-              Apply
-            </Link>
-          </div>
-
-          {/* ── Mobile View Controls ── */}
-          <div className="lg:hidden flex items-center gap-3">
-            <Link
-              href={`/${locale}/profile`}
-              className="w-[32px] h-[32px] rounded-full border border-[rgba(211,218,217,0.25)] bg-[#44444E] flex items-center justify-center text-[11px] font-medium text-[#D3DAD9]"
-            >
-              H
-            </Link>
-            <button
-              type="button"
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgba(211,218,217,0.18)] text-[#D3DAD9] bg-[#44444E]"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle navigation menu"
-            >
-              {menuOpen ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* ── Mobile Menu Dropdown ── */}
-        {menuOpen && (
-          <div className="lg:hidden bg-[#37353E] border-b border-[rgba(211,218,217,0.14)] px-6 py-4 flex flex-col gap-2.5 text-[14px]">
-            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#D3DAD9] border-b border-[rgba(211,218,217,0.08)]">
-              About
-            </Link>
-            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#D3DAD9] border-b border-[rgba(211,218,217,0.08)]">
-              Companies
-            </Link>
-            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#D3DAD9] border-b border-[rgba(211,218,217,0.08)]">
-              Library
-            </Link>
-            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#D3DAD9] border-b border-[rgba(211,218,217,0.08)]">
-              Partners
-            </Link>
-            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#D3DAD9] border-b border-[rgba(211,218,217,0.08)]">
-              Resources
-            </Link>
-            <Link href={`/${locale}/dashboard`} onClick={() => setMenuOpen(false)} className="py-2 text-[#D3DAD9] border-b border-[rgba(211,218,217,0.08)]">
-              Startup Jobs
-            </Link>
-            <div className="pt-2 flex items-center justify-between gap-3">
+            {/* RIGHT: Actions */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 8, paddingRight: 6 }}>
+              {/* Avatar */}
               <Link
-                href={`/${locale}/login`}
-                onClick={() => setMenuOpen(false)}
-                className="flex-1 text-center py-2 text-sm text-[#D3DAD9] border border-[rgba(211,218,217,0.18)] rounded-xl bg-[#44444E]"
+                href={`/${locale}/profile`}
+                title="My Profile"
+                className="hidden lg:flex"
+                style={{
+                  width: 34, height: 34, borderRadius: '50%',
+                  background: '#44444E', border: '1px solid rgba(211,218,217,0.2)',
+                  alignItems: 'center', justifyContent: 'center',
+                  fontSize: 12, fontWeight: 600, color: '#D3DAD9',
+                  textDecoration: 'none', flexShrink: 0,
+                }}
               >
-                Log in
+                H
               </Link>
+
+              {/* Apply CTA */}
               <Link
                 href={`/${locale}/register`}
-                onClick={() => setMenuOpen(false)}
-                className="flex-1 text-center py-2 text-sm bg-[#715A5A] text-[#D3DAD9] rounded-full border border-[rgba(211,218,217,0.2)]"
+                className="hidden lg:inline-flex"
                 style={{
-                  fontFamily: "'Source Serif 4', Georgia, serif",
-                  fontStyle: 'italic',
+                  height: 34, padding: '0 18px', borderRadius: 9999,
+                  background: '#715A5A', border: '1px solid rgba(211,218,217,0.18)',
+                  color: '#D3DAD9', fontSize: 13, fontWeight: 600, letterSpacing: '-0.01em',
+                  textDecoration: 'none', alignItems: 'center',
+                  flexShrink: 0, whiteSpace: 'nowrap',
                 }}
               >
                 Apply
               </Link>
+
+              {/* Mobile avatar */}
+              <Link
+                href={`/${locale}/profile`}
+                className="lg:hidden"
+                style={{
+                  width: 30, height: 30, borderRadius: '50%',
+                  background: '#44444E', border: '1px solid rgba(211,218,217,0.2)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 11, fontWeight: 600, color: '#D3DAD9', textDecoration: 'none', flexShrink: 0,
+                }}
+              >
+                H
+              </Link>
+
+              {/* Burger */}
+              <button
+                type="button"
+                className="lg:hidden"
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Toggle menu"
+                style={{
+                  width: 34, height: 34, borderRadius: 9999,
+                  background: menuOpen ? 'rgba(211,218,217,0.12)' : 'transparent',
+                  border: '1px solid rgba(211,218,217,0.18)',
+                  color: '#D3DAD9', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer', transition: 'background 0.15s', flexShrink: 0,
+                }}
+              >
+                {menuOpen ? (
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M4 7h16M4 12h16M4 17h16" />
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
-        )}
-      </header>
+
+          {/* Mega panel dropdown */}
+          {currentPanel && currentPanel.panel && (
+            <div
+              onMouseEnter={() => handleEnter(currentPanel.key)}
+              style={{
+                borderTop: '1px solid rgba(211,218,217,0.1)',
+                padding: '20px 24px 24px',
+                display: 'grid',
+                gridTemplateColumns: `repeat(${currentPanel.panel.length}, 1fr)`,
+                gap: '0 32px',
+                animation: 'evkFadeDown 0.15s ease',
+              }}
+            >
+              {currentPanel.panel.map(col => (
+                <div key={col.heading}>
+                  <p style={{
+                    fontSize: 10.5, fontWeight: 700, letterSpacing: '0.09em',
+                    textTransform: 'uppercase', color: '#715A5A', marginBottom: 10, paddingLeft: 8, margin: '0 0 10px 8px',
+                  }}>
+                    {col.heading}
+                  </p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {col.links.map(link => (
+                      <Link
+                        key={link.label}
+                        href={`/${locale}${link.href}`}
+                        onClick={() => setActivePanel(null)}
+                        className="nav-mega-link"
+                        style={{ display: 'block', padding: '8px 10px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.12s ease' }}
+                      >
+                        <span style={{ display: 'block', fontSize: 13.5, fontWeight: 600, color: '#D3DAD9', letterSpacing: '-0.01em', marginBottom: 2 }}>
+                          {link.label}
+                        </span>
+                        <span style={{ display: 'block', fontSize: 11.5, color: 'rgba(211,218,217,0.48)', lineHeight: 1.4 }}>
+                          {link.desc}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Mobile drawer */}
+          {menuOpen && (
+            <div style={{ borderTop: '1px solid rgba(211,218,217,0.1)', padding: '8px 10px 12px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {NAV_ITEMS.map(item => (
+                <Link
+                  key={item.key}
+                  href={`/${locale}${item.href || '/dashboard'}`}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    display: 'flex', alignItems: 'center', padding: '10px 14px',
+                    borderRadius: 12, fontSize: 14, fontWeight: 500,
+                    color: 'rgba(211,218,217,0.85)', textDecoration: 'none',
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div style={{ height: 1, background: 'rgba(211,218,217,0.1)', margin: '6px 0' }} />
+              <div style={{ display: 'flex', gap: 8, padding: '4px 4px 0' }}>
+                <Link
+                  href={`/${locale}/login`}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    height: 38, borderRadius: 9999, background: 'rgba(211,218,217,0.07)',
+                    border: '1px solid rgba(211,218,217,0.15)', color: '#D3DAD9',
+                    fontSize: 13, fontWeight: 500, textDecoration: 'none',
+                  }}
+                >
+                  Log in
+                </Link>
+                <Link
+                  href={`/${locale}/register`}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    height: 38, borderRadius: 9999, background: '#715A5A',
+                    border: '1px solid rgba(211,218,217,0.2)', color: '#D3DAD9',
+                    fontSize: 13, fontWeight: 600, textDecoration: 'none',
+                  }}
+                >
+                  Apply
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes evkFadeDown {
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .nav-mega-link:hover {
+          background: rgba(211,218,217,0.07) !important;
+        }
+      `}</style>
     </>
   );
 }
