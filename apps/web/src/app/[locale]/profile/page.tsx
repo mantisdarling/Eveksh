@@ -40,51 +40,51 @@ export default function ProfilePage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#09090b', color: '#fafafa' }}>
+    <div style={{ minHeight: '100vh', background: '#37353E', color: '#D3DAD9' }}>
       <Navbar locale={locale} />
       <main style={{ maxWidth: 760, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
         <div className="animate-fade-in-up" style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>Edit Profile</h1>
-          <p style={{ color: '#71717a', marginTop: '0.4rem' }}>How the world sees you on EVEKSH.</p>
+          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em', color: '#D3DAD9' }}>Edit Profile</h1>
+          <p style={{ color: '#a3a69f', marginTop: '0.4rem' }}>How the world sees you on EVEKSH.</p>
         </div>
 
         {/* Avatar */}
-        <div className="glass-panel animate-fade-in-up-delay-1" style={{ borderRadius: '1.25rem', padding: '2rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ width: 80, height: 80, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 700, color: '#fafafa', flexShrink: 0 }}>M</div>
+        <div className="glass-panel animate-fade-in-up-delay-1" style={{ borderRadius: '1.25rem', padding: '2rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem', background: '#44444E', border: '1px solid rgba(211,218,217,0.12)' }}>
+          <div style={{ width: 80, height: 80, borderRadius: '50%', background: '#37353E', border: '1px solid rgba(211,218,217,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 700, color: '#D3DAD9', flexShrink: 0 }}>M</div>
           <div>
-            <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Profile Photo</p>
-            <p style={{ color: '#71717a', fontSize: '0.85rem', marginBottom: '0.75rem' }}>Upload a professional photo to build trust.</p>
-            <button className="btn-ghost" style={{ fontSize: '0.82rem', padding: '0.5rem 1rem' }}>Upload Photo</button>
+            <p style={{ fontWeight: 600, marginBottom: '0.5rem', color: '#D3DAD9' }}>Profile Photo</p>
+            <p style={{ color: '#a3a69f', fontSize: '0.85rem', marginBottom: '0.75rem' }}>Upload a professional photo to build trust.</p>
+            <button className="btn-ghost" style={{ fontSize: '0.82rem', padding: '0.5rem 1rem', borderColor: 'rgba(211,218,217,0.15)', color: '#D3DAD9' }}>Upload Photo</button>
           </div>
         </div>
 
         <form onSubmit={handleSave} className="animate-fade-in-up-delay-2">
-          <div className="glass-panel" style={{ borderRadius: '1.25rem', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div className="glass-panel" style={{ borderRadius: '1.25rem', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', background: '#44444E', border: '1px solid rgba(211,218,217,0.12)' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a1a1aa', marginBottom: '0.5rem' }}>Headline</label>
+              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a3a69f', marginBottom: '0.5rem' }}>Headline</label>
               <input className="input-base" value={headline} onChange={e => setHeadline(e.target.value)} placeholder="e.g. Senior Software Engineer at Google" />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a1a1aa', marginBottom: '0.5rem' }}>Bio</label>
+              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a3a69f', marginBottom: '0.5rem' }}>Bio</label>
               <textarea className="input-base" value={bio} onChange={e => setBio(e.target.value)} placeholder="Tell learners about your background, expertise, and what you can help them with..." rows={5} style={{ resize: 'vertical', minHeight: 120 }} />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a1a1aa', marginBottom: '0.75rem' }}>Skills</label>
+              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a3a69f', marginBottom: '0.75rem' }}>Skills</label>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {SKILLS_OPTIONS.map(s => (
-                  <button key={s} type="button" onClick={() => toggleSkill(s)} style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', border: '1px solid', fontSize: '0.8rem', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s', ...(selectedSkills.includes(s) ? { background: '#09090b', borderColor: '#09090b', color: '#ffffff' } : { background: 'transparent', borderColor: 'rgba(255,255,255,0.1)', color: '#71717a' }) }}>
+                  <button key={s} type="button" onClick={() => toggleSkill(s)} style={{ padding: '0.35rem 0.85rem', borderRadius: '9999px', border: '1px solid', fontSize: '0.8rem', fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.2s', ...(selectedSkills.includes(s) ? { background: '#715A5A', borderColor: '#715A5A', color: '#D3DAD9' } : { background: '#37353E', borderColor: 'rgba(211,218,217,0.15)', color: '#a3a69f' }) }}>
                     {s}
                   </button>
                 ))}
               </div>
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a1a1aa', marginBottom: '0.5rem' }}>Hourly Rate (USD) — Experts only</label>
+              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 500, color: '#a3a69f', marginBottom: '0.5rem' }}>Hourly Rate (USD) — Experts only</label>
               <input className="input-base" type="number" value={hourlyRate} onChange={e => setHourlyRate(e.target.value)} placeholder="e.g. 150" min={10} max={2000} style={{ maxWidth: 200 }} />
             </div>
 
-            {error && <p style={{ color: '#a1a1aa', fontSize: '0.85rem' }}>{error}</p>}
-            {saved && <p style={{ color: '#a1a1aa', fontSize: '0.85rem' }}>Profile saved successfully</p>}
+            {error && <p style={{ color: '#715A5A', fontSize: '0.85rem' }}>{error}</p>}
+            {saved && <p style={{ color: '#D3DAD9', fontSize: '0.85rem' }}>Profile saved successfully</p>}
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <button type="submit" disabled={saving} className="btn-primary" style={{ padding: '0.8rem 2rem' }}>

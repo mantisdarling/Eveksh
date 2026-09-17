@@ -71,7 +71,7 @@ My sessions are direct, focused, and immediately actionable. I won't waste your 
 
 function StarRating({ rating }: { rating: number; size?: number }) {
   return (
-    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fafafa', fontFamily: 'monospace' }}>
+    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#D3DAD9', fontFamily: 'monospace' }}>
       {rating.toFixed(1)} / 5.0
     </span>
   );
@@ -89,48 +89,48 @@ export default async function ExpertProfilePage({
   const p = expert.profile;
 
   return (
-    <div style={{ minHeight: '100vh', background: '#09090b', color: '#fafafa' }}>
+    <div style={{ minHeight: '100vh', background: '#37353E', color: '#D3DAD9' }}>
       {/* Background orbs */}
-      <div style={{ position: 'fixed', top: '-10%', right: '-10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(63,63,70,0.12) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'fixed', top: '-10%', right: '-10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(113,90,90,0.12) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none' }} />
 
       <Navbar locale={locale} />
 
       <main style={{ maxWidth: 1000, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
         {/* Hero card */}
-        <div className="glass-panel animate-fade-in-up" style={{ borderRadius: '1.5rem', padding: '2.5rem', marginBottom: '1.5rem' }}>
+        <div className="glass-panel animate-fade-in-up" style={{ borderRadius: '1.5rem', padding: '2.5rem', marginBottom: '1.5rem', background: '#44444E', border: '1px solid rgba(211,218,217,0.12)' }}>
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
             {/* Avatar */}
             <div style={{ position: 'relative', flexShrink: 0 }}>
               {p?.avatarUrl ? (
-                <img src={p.avatarUrl} alt={expert.name} style={{ width: 100, height: 100, borderRadius: '50%', objectFit: 'cover' }} />
+                <img src={p.avatarUrl} alt={expert.name} style={{ width: 100, height: 100, borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(211,218,217,0.2)' }} />
               ) : (
-                <div style={{ width: 100, height: 100, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', fontWeight: 900, color: '#fafafa' }}>
+                <div style={{ width: 100, height: 100, borderRadius: '50%', background: '#37353E', border: '1px solid rgba(211,218,217,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', fontWeight: 900, color: '#D3DAD9' }}>
                   {expert.name.charAt(0)}
                 </div>
               )}
               {p?.isVerified && (
-                <div style={{ position: 'absolute', bottom: 2, right: 2, width: 26, height: 26, borderRadius: '50%', background: '#09090b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', border: '2px solid #09090b', color: '#fafafa' }}>✓</div>
+                <div style={{ position: 'absolute', bottom: 2, right: 2, width: 26, height: 26, borderRadius: '50%', background: '#715A5A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', border: '2px solid #44444E', color: '#D3DAD9' }}>✓</div>
               )}
             </div>
 
             {/* Info */}
             <div style={{ flex: 1, minWidth: 240 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '0.35rem' }}>
-                <h1 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.03em', color: '#fafafa' }}>{expert.name}</h1>
-                {p?.isVerified && <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#fafafa', background: '#27272a', border: '1px solid #3f3f46', padding: '0.2rem 0.6rem', borderRadius: '9999px' }}>✓ VERIFIED</span>}
+                <h1 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-0.03em', color: '#D3DAD9' }}>{expert.name}</h1>
+                {p?.isVerified && <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#D3DAD9', background: 'rgba(113,90,90,0.3)', border: '1px solid rgba(113,90,90,0.6)', padding: '0.2rem 0.6rem', borderRadius: '9999px' }}>✓ VERIFIED</span>}
               </div>
-              <p style={{ color: '#a1a1aa', fontSize: '1rem', marginBottom: '0.75rem' }}>{p?.headline}</p>
+              <p style={{ color: '#a3a69f', fontSize: '1rem', marginBottom: '0.75rem' }}>{p?.headline}</p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
                 {p?.rating && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                     <StarRating rating={p.rating} />
-                    <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fafafa' }}>{p.rating.toFixed(1)}</span>
-                    <span style={{ fontSize: '0.8rem', color: '#71717a' }}>({expert.reviewsReceived?.length || 0} reviews)</span>
+                    <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#D3DAD9' }}>{p.rating.toFixed(1)}</span>
+                    <span style={{ fontSize: '0.8rem', color: '#a3a69f' }}>({expert.reviewsReceived?.length || 0} reviews)</span>
                   </div>
                 )}
-                <span style={{ color: '#3f3f46' }}>·</span>
-                <span style={{ fontSize: '0.875rem', color: '#71717a' }}>Usually responds within 1 hour</span>
+                <span style={{ color: 'rgba(211,218,217,0.2)' }}>·</span>
+                <span style={{ fontSize: '0.875rem', color: '#a3a69f' }}>Usually responds within 1 hour</span>
               </div>
 
               {/* Skills */}
@@ -140,9 +140,9 @@ export default async function ExpertProfilePage({
             </div>
 
             {/* Booking CTA */}
-            <div className="glass-panel-bright" style={{ borderRadius: '1.25rem', padding: '1.75rem', minWidth: 220, flexShrink: 0, textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', fontWeight: 900, color: '#fafafa', marginBottom: '0.1rem' }}>${p?.hourlyRate}</p>
-              <p style={{ fontSize: '0.8rem', color: '#71717a', marginBottom: '1.25rem' }}>per hour · escrow protected</p>
+            <div className="glass-panel" style={{ borderRadius: '1.25rem', padding: '1.75rem', minWidth: 220, flexShrink: 0, textAlign: 'center', background: '#37353E', border: '1px solid rgba(211,218,217,0.15)' }}>
+              <p style={{ fontSize: '2rem', fontWeight: 900, color: '#D3DAD9', marginBottom: '0.1rem' }}>${p?.hourlyRate}</p>
+              <p style={{ fontSize: '0.8rem', color: '#a3a69f', marginBottom: '1.25rem' }}>per hour · escrow protected</p>
               <a
                 href={`/${locale}/book?expert=${expert.id}`}
                 className="btn-primary"
@@ -150,7 +150,7 @@ export default async function ExpertProfilePage({
               >
                 Book a Session →
               </a>
-              <p style={{ fontSize: '0.75rem', color: '#52525b' }}>$0 charged until session ends</p>
+              <p style={{ fontSize: '0.75rem', color: '#787a74' }}>$0 charged until session ends</p>
             </div>
           </div>
         </div>
@@ -159,36 +159,36 @@ export default async function ExpertProfilePage({
           {/* Bio + Reviews */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {/* About */}
-            <div className="glass-panel animate-fade-in-up-delay-1" style={{ borderRadius: '1.25rem', padding: '2rem' }}>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.25rem', color: '#fafafa' }}>About</h2>
-              <div style={{ color: '#a1a1aa', lineHeight: 1.8, fontSize: '0.9rem', whiteSpace: 'pre-line' }}>
+            <div className="glass-panel animate-fade-in-up-delay-1" style={{ borderRadius: '1.25rem', padding: '2rem', background: '#44444E', border: '1px solid rgba(211,218,217,0.12)' }}>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.25rem', color: '#D3DAD9' }}>About</h2>
+              <div style={{ color: '#a3a69f', lineHeight: 1.8, fontSize: '0.9rem', whiteSpace: 'pre-line' }}>
                 {p?.bio}
               </div>
             </div>
 
             {/* Reviews */}
             {expert.reviewsReceived && expert.reviewsReceived.length > 0 && (
-              <div className="glass-panel animate-fade-in-up-delay-2" style={{ borderRadius: '1.25rem', padding: '2rem' }}>
-                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.25rem', color: '#fafafa' }}>
+              <div className="glass-panel animate-fade-in-up-delay-2" style={{ borderRadius: '1.25rem', padding: '2rem', background: '#44444E', border: '1px solid rgba(211,218,217,0.12)' }}>
+                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1.25rem', color: '#D3DAD9' }}>
                   Reviews
-                  <span style={{ marginLeft: '0.5rem', fontSize: '0.8rem', color: '#71717a', fontWeight: 400 }}>({expert.reviewsReceived.length})</span>
+                  <span style={{ marginLeft: '0.5rem', fontSize: '0.8rem', color: '#a3a69f', fontWeight: 400 }}>({expert.reviewsReceived.length})</span>
                 </h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   {expert.reviewsReceived.map((r, i) => (
-                    <div key={i} style={{ paddingBottom: i < expert.reviewsReceived!.length - 1 ? '1.25rem' : 0, borderBottom: i < expert.reviewsReceived!.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
+                    <div key={i} style={{ paddingBottom: i < expert.reviewsReceived!.length - 1 ? '1.25rem' : 0, borderBottom: i < expert.reviewsReceived!.length - 1 ? '1px solid rgba(211,218,217,0.1)' : 'none' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.6rem' }}>
-                        <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg,#3f3f46,#27272a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#a1a1aa' }}>
+                        <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#37353E', border: '1px solid rgba(211,218,217,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700, color: '#D3DAD9' }}>
                           {r.learner?.name.charAt(0)}
                         </div>
                         <div>
-                          <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#fafafa' }}>{r.learner?.name}</p>
+                          <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#D3DAD9' }}>{r.learner?.name}</p>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <StarRating rating={r.rating} size={12} />
-                            <span style={{ fontSize: '0.72rem', color: '#52525b' }}>{new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+                            <span style={{ fontSize: '0.72rem', color: '#787a74' }}>{new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
                           </div>
                         </div>
                       </div>
-                      {r.comment && <p style={{ color: '#a1a1aa', fontSize: '0.875rem', lineHeight: 1.7 }}>&ldquo;{r.comment}&rdquo;</p>}
+                      {r.comment && <p style={{ color: '#a3a69f', fontSize: '0.875rem', lineHeight: 1.7 }}>&ldquo;{r.comment}&rdquo;</p>}
                     </div>
                   ))}
                 </div>
@@ -199,33 +199,33 @@ export default async function ExpertProfilePage({
           {/* Sidebar */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {/* Quick stats */}
-            <div className="glass-panel animate-fade-in-up-delay-1" style={{ borderRadius: '1.25rem', padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#71717a', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Quick Stats</h3>
+            <div className="glass-panel animate-fade-in-up-delay-1" style={{ borderRadius: '1.25rem', padding: '1.5rem', background: '#44444E', border: '1px solid rgba(211,218,217,0.12)' }}>
+              <h3 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#a3a69f', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Quick Stats</h3>
               {[
                 { label: 'Sessions completed', value: '142' },
                 { label: 'Response time', value: '< 1 hour' },
                 { label: 'Languages', value: 'English' },
                 { label: 'Timezone', value: 'PST (UTC-8)' },
               ].map(({ label, value }) => (
-                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.6rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <span style={{ color: '#71717a', fontSize: '0.82rem' }}>{label}</span>
-                  <span style={{ color: '#fafafa', fontSize: '0.82rem', fontWeight: 600 }}>{value}</span>
+                <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.6rem 0', borderBottom: '1px solid rgba(211,218,217,0.1)' }}>
+                  <span style={{ color: '#a3a69f', fontSize: '0.82rem' }}>{label}</span>
+                  <span style={{ color: '#D3DAD9', fontSize: '0.82rem', fontWeight: 600 }}>{value}</span>
                 </div>
               ))}
             </div>
 
             {/* Session types */}
-            <div className="glass-panel animate-fade-in-up-delay-2" style={{ borderRadius: '1.25rem', padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#71717a', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Session Types</h3>
+            <div className="glass-panel animate-fade-in-up-delay-2" style={{ borderRadius: '1.25rem', padding: '1.5rem', background: '#44444E', border: '1px solid rgba(211,218,217,0.12)' }}>
+              <h3 style={{ fontSize: '0.875rem', fontWeight: 600, color: '#a3a69f', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Session Types</h3>
               {[
                 { label: 'Career Coaching', duration: '60 min' },
                 { label: 'System Design', duration: '90 min' },
                 { label: 'Interview Prep', duration: '60 min' },
                 { label: 'Code Review', duration: '45 min' },
               ].map(({ label, duration }) => (
-                <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 0', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                  <span style={{ color: '#a1a1aa', fontSize: '0.82rem' }}>{label}</span>
-                  <span style={{ color: '#71717a', fontSize: '0.75rem', fontFamily: 'monospace' }}>{duration}</span>
+                <div key={label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 0', borderBottom: '1px solid rgba(211,218,217,0.1)' }}>
+                  <span style={{ color: '#a3a69f', fontSize: '0.82rem' }}>{label}</span>
+                  <span style={{ color: '#787a74', fontSize: '0.75rem', fontFamily: 'monospace' }}>{duration}</span>
                 </div>
               ))}
             </div>

@@ -45,9 +45,9 @@ const MOCK_EXPERTS: Expert[] = [
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-1 text-[11px] text-zinc-600 font-mono">
+    <div className="flex items-center gap-1 text-[11px] text-[#a3a69f] font-mono">
       <span>Rating</span>
-      <span className="text-zinc-900 font-semibold">{rating.toFixed(2)}</span>
+      <span className="text-[#D3DAD9] font-semibold">{rating.toFixed(2)}</span>
     </div>
   );
 }
@@ -55,7 +55,7 @@ function StarRating({ rating }: { rating: number }) {
 function AvatarInitials({ name }: { name: string }) {
   const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
   return (
-    <div className="w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-900 flex-shrink-0">
+    <div className="w-11 h-11 rounded-xl bg-[#37353E] border border-[rgba(211,218,217,0.18)] flex items-center justify-center text-xs font-bold text-[#D3DAD9] flex-shrink-0">
       {initials}
     </div>
   );
@@ -64,36 +64,36 @@ function AvatarInitials({ name }: { name: string }) {
 function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
   const p = expert.profile;
   return (
-    <div className="bento-card p-5 flex flex-col justify-between space-y-4 bg-white border border-zinc-200 shadow-sm hover:border-zinc-300 hover:shadow-md">
+    <div className="bento-card p-5 flex flex-col justify-between space-y-4">
       <div className="space-y-3">
         {/* Top Info Header */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
             {p?.avatarUrl ? (
-              <img src={p.avatarUrl} alt={expert.name} className="w-11 h-11 rounded-xl object-cover border border-zinc-200 flex-shrink-0" />
+              <img src={p.avatarUrl} alt={expert.name} className="w-11 h-11 rounded-xl object-cover border border-[rgba(211,218,217,0.18)] flex-shrink-0" />
             ) : (
               <AvatarInitials name={expert.name} />
             )}
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <h3 className="font-bold text-sm text-zinc-950 truncate">{expert.name}</h3>
-                <span className="text-[10px] font-mono text-zinc-600 bg-zinc-100 px-1.5 py-0.5 rounded border border-zinc-200 font-medium">Verified</span>
+                <h3 className="font-bold text-sm text-[#D3DAD9] truncate">{expert.name}</h3>
+                <span className="text-[10px] font-mono text-[#D3DAD9] bg-[#715A5A]/50 px-1.5 py-0.5 rounded border border-[rgba(211,218,217,0.16)] font-medium">Verified</span>
               </div>
-              <p className="text-xs text-zinc-500 truncate mt-0.5">{p?.headline}</p>
+              <p className="text-xs text-[#a3a69f] truncate mt-0.5">{p?.headline}</p>
             </div>
           </div>
 
           {p?.hourlyRate && (
             <div className="text-right flex-shrink-0">
-              <div className="text-base font-extrabold text-zinc-950 tracking-tight">${p.hourlyRate}</div>
-              <div className="text-[10px] font-mono text-zinc-400 uppercase">/ hr</div>
+              <div className="text-base font-extrabold text-[#D3DAD9] tracking-tight">${p.hourlyRate}</div>
+              <div className="text-[10px] font-mono text-[#82847f] uppercase">/ hr</div>
             </div>
           )}
         </div>
 
         {/* Bio Preview */}
         {p?.bio && (
-          <p className="text-xs text-zinc-600 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-[#a3a69f] line-clamp-2 leading-relaxed font-normal">
             {p.bio}
           </p>
         )}
@@ -102,7 +102,7 @@ function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
         {p?.skills && p.skills.length > 0 && (
           <div className="flex flex-wrap gap-1.5 pt-1">
             {p.skills.slice(0, 4).map((s) => (
-              <span key={s} className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-zinc-100 text-zinc-700 border border-zinc-200">
+              <span key={s} className="skill-chip">
                 {s}
               </span>
             ))}
@@ -111,11 +111,11 @@ function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
       </div>
 
       {/* Action Footer */}
-      <div className="pt-3 border-t border-zinc-100 flex items-center justify-between gap-3">
+      <div className="pt-3 border-t border-[rgba(211,218,217,0.1)] flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           {p?.rating && <StarRating rating={p.rating} />}
-          <span className="text-[11px] text-zinc-300">·</span>
-          <span className="text-[11px] text-zinc-500">
+          <span className="text-[11px] text-[#82847f]">·</span>
+          <span className="text-[11px] text-[#a3a69f]">
             Available
           </span>
         </div>
@@ -123,13 +123,13 @@ function ExpertCard({ expert, locale }: { expert: Expert; locale: string }) {
         <div className="flex items-center gap-2">
           <a
             href={`/${locale}/experts/${expert.id}`}
-            className="btn-midday-secondary text-xs py-1.5 px-3"
+            className="btn-midday-secondary text-xs py-1.5 px-3 rounded-lg"
           >
             Profile
           </a>
           <a
             href={`/${locale}/book?expert=${expert.id}`}
-            className="btn-midday-primary text-xs py-1.5 px-3.5"
+            className="btn-midday-primary text-xs py-1.5 px-3.5 rounded-lg"
           >
             Book
           </a>
@@ -145,29 +145,29 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
   const experts = await getExperts();
 
   return (
-    <div className="min-h-screen bg-white text-[#09090b] relative">
+    <div className="min-h-screen text-[#D3DAD9] relative" style={{ backgroundColor: '#37353E' }}>
       <Navbar locale={locale} />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-zinc-200 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 border-b border-[rgba(211,218,217,0.12)] pb-6">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1.5">
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-[#a3a69f] uppercase tracking-widest mb-1.5">
               <span>Directory</span>
               <span>·</span>
-              <span className="text-zinc-900 font-semibold">500+ Mentors</span>
+              <span className="text-[#D3DAD9] font-semibold">500+ Mentors</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-zinc-950">
+            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.03em] text-[#D3DAD9]">
               Explore Mentors
             </h1>
-            <p className="text-zinc-600 text-xs sm:text-sm mt-1">
+            <p className="text-[#a3a69f] text-xs sm:text-sm mt-1">
               Direct access to verified tech leaders, AI researchers, and startup founders.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="kbd">⌘K</span>
-            <span className="text-xs text-zinc-500 font-mono">Quick search</span>
+            <span className="text-xs font-mono px-2 py-1 rounded bg-[#44444E] border border-[rgba(211,218,217,0.14)] text-[#D3DAD9]">⌘K</span>
+            <span className="text-xs text-[#a3a69f] font-mono">Quick search</span>
           </div>
         </div>
 
@@ -178,7 +178,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
 
         {/* Directory Grid */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs font-mono uppercase text-zinc-500">
+          <div className="flex items-center justify-between text-xs font-mono uppercase text-[#a3a69f]">
             <span>AVAILABLE EXPERTS ({experts.length})</span>
             <span>SORTED BY RELEVANCE</span>
           </div>

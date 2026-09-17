@@ -13,27 +13,33 @@
 }
 
 :root {
-  --bg: #ffffff;
-  --surface: #ffffff;
-  --surface-raised: #f4f4f5;
-  --surface-hover: #f4f4f5;
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --border-subtle: #f4f4f5;
-  --text: #09090b;
-  --text-muted: #71717a;
-  --text-subtle: #a1a1aa;
-  --accent: #000000;
-  --accent-foreground: #ffffff;
+  /* Designer Curated Palette:
+     Base Deep Charcoal:   #37353E
+     Surface Slate:        #44444E
+     Warm Accent / Rose:   #715A5A
+     Highlight Mist White: #D3DAD9
+  */
+  --bg: #37353E;
+  --surface: #44444E;
+  --surface-raised: #4b4b57;
+  --surface-hover: #52525f;
+  --border: rgba(211, 218, 217, 0.14);
+  --border-strong: rgba(211, 218, 217, 0.28);
+  --border-subtle: rgba(211, 218, 217, 0.08);
+  --text: #D3DAD9;
+  --text-muted: #a3a69f;
+  --text-subtle: #82847f;
+  --accent: #715A5A;
+  --accent-foreground: #D3DAD9;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: #ffffff;
-  color: #09090b;
-  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #37353E;
+  color: #D3DAD9;
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
@@ -41,65 +47,82 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 0, 0, 0.1);
-  color: #000000;
+  background: #715A5A;
+  color: #D3DAD9;
 }
 
 /* ─── Scrollbar ──────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #ffffff; }
-::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+::-webkit-scrollbar-track { background: #37353E; }
+::-webkit-scrollbar-thumb { background: #52525f; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #715A5A; }
 
-/* ─── Clean Pure White Theme ─────────────────────── */
+/* ─── Glass Panels & Cards ───────────────────────── */
+.glass-panel {
+  background: rgba(68, 68, 78, 0.65);
+  border: 1px solid rgba(211, 218, 217, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.22);
+}
 
-/* ─── Midday Light Bento Cards ───────────────────── */
+.glass-panel-bright {
+  background: rgba(68, 68, 78, 0.9);
+  border: 1px solid rgba(211, 218, 217, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 40px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Bento Cards ────────────────────────────────── */
 .bento-card {
-  background: #ffffff;
-  border: 1px solid #e4e4e7;
+  background: #44444E;
+  border: 1px solid rgba(211, 218, 217, 0.12);
   border-radius: 1rem;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.2);
 }
 
 .bento-card:hover {
-  border-color: #d4d4d8;
+  border-color: rgba(211, 218, 217, 0.28);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 14px 34px -6px rgba(0, 0, 0, 0.35);
 }
 
 .bento-card-subtle {
-  background: #fafafa;
-  border: 1px solid #e4e4e7;
+  background: rgba(68, 68, 78, 0.5);
+  border: 1px solid rgba(211, 218, 217, 0.08);
   border-radius: 0.875rem;
 }
 
-/* ─── Midday Light Buttons ───────────────────────── */
+/* ─── Designer Buttons ───────────────────────────── */
 .btn-midday-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #09090b;
-  color: #ffffff;
+  background: #D3DAD9;
+  color: #37353E;
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0.65rem 1.4rem;
   border-radius: 0.625rem;
-  border: 1px solid #09090b;
+  border: 1px solid #D3DAD9;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   letter-spacing: -0.01em;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-midday-primary:hover {
-  background: #27272a;
-  border-color: #27272a;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #37353E;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(211, 218, 217, 0.25);
 }
 
 .btn-midday-primary:active {
@@ -111,23 +134,22 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #ffffff;
-  color: #09090b;
+  background: rgba(68, 68, 78, 0.7);
+  color: #D3DAD9;
   font-weight: 500;
   font-size: 0.875rem;
   padding: 0.65rem 1.4rem;
   border-radius: 0.625rem;
-  border: 1px solid #e4e4e7;
+  border: 1px solid rgba(211, 218, 217, 0.16);
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .btn-midday-secondary:hover {
-  background: #f4f4f5;
-  border-color: #d4d4d8;
-  color: #000000;
+  background: #715A5A;
+  border-color: #715A5A;
+  color: #D3DAD9;
   transform: translateY(-1px);
 }
 
@@ -137,7 +159,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   background: transparent;
-  color: #52525b;
+  color: #a3a69f;
   font-weight: 500;
   font-size: 0.875rem;
   padding: 0.55rem 1rem;
@@ -149,11 +171,68 @@ body {
 }
 
 .btn-midday-ghost:hover {
-  color: #09090b;
-  background: #f4f4f5;
+  color: #D3DAD9;
+  background: rgba(68, 68, 78, 0.6);
 }
 
-/* ─── Midday Badge & Monospace Tags (Light) ──────── */
+/* Primary legacy helper */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #715A5A;
+  color: #D3DAD9;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.625rem;
+  border: 1px solid rgba(211, 218, 217, 0.18);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #846a6a;
+  color: #ffffff;
+}
+
+.btn-ghost {
+  background: rgba(68, 68, 78, 0.5);
+  color: #D3DAD9;
+  border: 1px solid rgba(211, 218, 217, 0.12);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background: #44444E;
+}
+
+/* ─── Form Elements ──────────────────────────────── */
+.input-base {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #37353E;
+  border: 1px solid rgba(211, 218, 217, 0.18);
+  color: #D3DAD9;
+  font-family: inherit;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+}
+
+.input-base:focus {
+  outline: none;
+  border-color: #715A5A;
+  box-shadow: 0 0 0 2px rgba(113, 90, 90, 0.3);
+}
+
+.input-base::placeholder {
+  color: #82847f;
+}
+
+/* ─── Badges & Chips ─────────────────────────────── */
 .badge-mono {
   font-family: 'Geist Mono', monospace;
   font-size: 0.6875rem;
@@ -161,28 +240,26 @@ body {
   text-transform: uppercase;
   padding: 0.25rem 0.65rem;
   border-radius: 0.375rem;
-  background: #f4f4f5;
-  border: 1px solid #e4e4e7;
-  color: #52525b;
+  background: #44444E;
+  border: 1px solid rgba(211, 218, 217, 0.16);
+  color: #D3DAD9;
 }
 
-.status-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #71717a;
-  display: inline-block;
+.skill-chip {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.5rem;
+  background: rgba(68, 68, 78, 0.7);
+  border: 1px solid rgba(211, 218, 217, 0.14);
+  color: #D3DAD9;
 }
 
-/* ─── Keyboard Shortcut KBD (Light) ──────────────── */
-.kbd {
-  font-family: 'Geist Mono', monospace;
-  font-size: 0.6875rem;
-  padding: 0.15rem 0.45rem;
-  border-radius: 0.25rem;
-  background: #f4f4f5;
-  border: 1px solid #d4d4d8;
-  color: #52525b;
+.card-hover {
+  transition: all 0.2s ease;
+}
+.card-hover:hover {
+  border-color: rgba(211, 218, 217, 0.28);
+  transform: translateY(-2px);
 }
 
 /* ─── Animations ─────────────────────────────────── */
@@ -193,4 +270,13 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in-up {
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-fade-in-up-delay-1 {
+  animation: fadeIn 0.5s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-fade-in-up-delay-2 {
+  animation: fadeIn 0.5s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

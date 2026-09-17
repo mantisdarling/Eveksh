@@ -13,13 +13,13 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 const CARD_ELEMENT_OPTIONS = {
   style: {
     base: {
-      color: '#fafafa',
+      color: '#D3DAD9',
       fontFamily: 'Inter, system-ui, sans-serif',
       fontSize: '15px',
-      '::placeholder': { color: '#52525b' },
-      iconColor: '#a1a1aa',
+      '::placeholder': { color: '#82847f' },
+      iconColor: '#715A5A',
     },
-    invalid: { color: '#e4e4e7', iconColor: '#e4e4e7' },
+    invalid: { color: '#D3DAD9', iconColor: '#715A5A' },
   },
 };
 
@@ -71,9 +71,9 @@ function CheckoutForm({ amount, expertId, locale }: { amount: number; expertId: 
   if (success) {
     return (
       <div style={{ textAlign: 'center', padding: '2rem 0' }}>
-        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
-        <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: '#fafafa' }}>Payment Held in Escrow!</h3>
-        <p style={{ color: '#71717a', fontSize: '0.875rem', lineHeight: 1.6 }}>
+        <div style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#715A5A' }}>Done</div>
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: '0.5rem', color: '#D3DAD9' }}>Payment Held in Escrow!</h3>
+        <p style={{ color: '#a3a69f', fontSize: '0.875rem', lineHeight: 1.6 }}>
           ${amount} is securely held. It will be released to your mentor after your session ends.
         </p>
         <a href={`/${locale}/appointments`} style={{ display: 'inline-block', marginTop: '1.5rem', textDecoration: 'none' }} className="btn-primary">
@@ -86,23 +86,23 @@ function CheckoutForm({ amount, expertId, locale }: { amount: number; expertId: 
   return (
     <form onSubmit={handlePay} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       <div>
-        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 500, color: '#a1a1aa', marginBottom: '0.5rem' }}>Card Details</label>
-        <div style={{ background: 'rgba(39,39,42,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.75rem', padding: '0.9rem 1rem', transition: 'all 0.2s' }}>
+        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 500, color: '#a3a69f', marginBottom: '0.5rem' }}>Card Details</label>
+        <div style={{ background: '#37353E', border: '1px solid rgba(211,218,217,0.15)', borderRadius: '0.75rem', padding: '0.9rem 1rem', transition: 'all 0.2s' }}>
           <CardElement options={CARD_ELEMENT_OPTIONS} />
         </div>
       </div>
 
-      <div style={{ background: '#18181b', border: '1px solid #27272a', borderRadius: '0.75rem', padding: '0.875rem 1rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+      <div style={{ background: '#37353E', border: '1px solid rgba(211,218,217,0.15)', borderRadius: '0.75rem', padding: '0.875rem 1rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
         <div>
-          <p style={{ fontSize: '0.8rem', color: '#fafafa', fontWeight: 600, marginBottom: '0.15rem' }}>Escrow Protected</p>
-          <p style={{ fontSize: '0.75rem', color: '#a1a1aa', lineHeight: 1.5 }}>
+          <p style={{ fontSize: '0.8rem', color: '#D3DAD9', fontWeight: 600, marginBottom: '0.15rem' }}>Escrow Protected</p>
+          <p style={{ fontSize: '0.75rem', color: '#a3a69f', lineHeight: 1.5 }}>
             Funds are held safely until your session completes. Use test card: 4242 4242 4242 4242.
           </p>
         </div>
       </div>
 
       {error && (
-        <div style={{ background: '#18181b', border: '1px solid #3f3f46', borderRadius: '0.75rem', padding: '0.75rem 1rem', color: '#f4f4f5', fontSize: '0.85rem' }}>
+        <div style={{ background: 'rgba(113,90,90,0.25)', border: '1px solid rgba(113,90,90,0.5)', borderRadius: '0.75rem', padding: '0.75rem 1rem', color: '#D3DAD9', fontSize: '0.85rem' }}>
           {error}
         </div>
       )}
@@ -110,13 +110,13 @@ function CheckoutForm({ amount, expertId, locale }: { amount: number; expertId: 
       <button type="submit" disabled={paying || !stripe} className="btn-primary" style={{ width: '100%', padding: '0.95rem', fontSize: '1rem' }}>
         {paying ? (
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
-            <span style={{ width: 16, height: 16, border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.6s linear infinite' }} />
+            <span style={{ width: 16, height: 16, border: '2px solid rgba(55,53,62,0.3)', borderTopColor: '#37353E', borderRadius: '50%', display: 'inline-block', animation: 'spin 0.6s linear infinite' }} />
             Processing...
           </span>
         ) : `Pay $${amount} — Hold in Escrow`}
       </button>
 
-      <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#52525b' }}>
+      <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#787a74' }}>
         Secured by Stripe · PCI DSS Compliant · SSL Encrypted
       </p>
 

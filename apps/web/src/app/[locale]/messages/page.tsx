@@ -39,28 +39,28 @@ export default function MessagesPage() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: '#09090b', color: '#fafafa' }}>
+    <div style={{ minHeight: '100vh', background: '#37353E', color: '#D3DAD9' }}>
       <Navbar locale={locale} />
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '5rem 1.5rem 2rem', height: 'calc(100vh - 0px)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '1.25rem', height: 'calc(100vh - 7rem)' }}>
           {/* Sidebar */}
           <div className="glass-panel" style={{ borderRadius: '1.25rem', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', fontWeight: 700, fontSize: '1rem' }}>
+            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(211,218,217,0.1)', fontWeight: 700, fontSize: '1rem', color: '#D3DAD9' }}>
               Messages
             </div>
             <div style={{ overflowY: 'auto', flex: 1 }}>
               {CONVERSATIONS.map(c => (
-                <div key={c.id} onClick={() => setActiveConvo(c.id)} style={{ padding: '1rem 1.25rem', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'all 0.15s', background: activeConvo === c.id ? 'rgba(255,255,255,0.06)' : 'transparent', display: 'flex', gap: '0.875rem', alignItems: 'center' }}>
-                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#fff', flexShrink: 0, position: 'relative' }}>
+                <div key={c.id} onClick={() => setActiveConvo(c.id)} style={{ padding: '1rem 1.25rem', cursor: 'pointer', borderBottom: '1px solid rgba(211,218,217,0.06)', transition: 'all 0.15s', background: activeConvo === c.id ? 'rgba(113,90,90,0.25)' : 'transparent', display: 'flex', gap: '0.875rem', alignItems: 'center' }}>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#44444E', border: '1px solid rgba(211,218,217,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#D3DAD9', flexShrink: 0, position: 'relative' }}>
                     {c.name.charAt(0)}
-                    {c.unread > 0 && <span style={{ position: 'absolute', top: -2, right: -2, width: 16, height: 16, borderRadius: '50%', background: '#09090b', fontSize: '0.6rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#fff' }}>{c.unread}</span>}
+                    {c.unread > 0 && <span style={{ position: 'absolute', top: -2, right: -2, width: 16, height: 16, borderRadius: '50%', background: '#715A5A', fontSize: '0.6rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#D3DAD9' }}>{c.unread}</span>}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
-                      <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#fafafa' }}>{c.name}</span>
-                      <span style={{ fontSize: '0.72rem', color: '#52525b' }}>{c.time}</span>
+                      <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#D3DAD9' }}>{c.name}</span>
+                      <span style={{ fontSize: '0.72rem', color: '#82847f' }}>{c.time}</span>
                     </div>
-                    <p style={{ color: '#71717a', fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.lastMsg}</p>
+                    <p style={{ color: '#a3a69f', fontSize: '0.8rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{c.lastMsg}</p>
                   </div>
                 </div>
               ))}
@@ -70,11 +70,11 @@ export default function MessagesPage() {
           {/* Chat area */}
           <div className="glass-panel" style={{ borderRadius: '1.25rem', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             {/* Header */}
-            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#fff' }}>{activeConvoData?.name.charAt(0)}</div>
+            <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid rgba(211,218,217,0.1)', display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
+              <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#44444E', border: '1px solid rgba(211,218,217,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem', color: '#D3DAD9' }}>{activeConvoData?.name.charAt(0)}</div>
               <div>
-                <p style={{ fontWeight: 700, fontSize: '0.95rem' }}>{activeConvoData?.name}</p>
-                <p style={{ color: '#71717a', fontSize: '0.78rem' }}>{activeConvoData?.headline}</p>
+                <p style={{ fontWeight: 700, fontSize: '0.95rem', color: '#D3DAD9' }}>{activeConvoData?.name}</p>
+                <p style={{ color: '#a3a69f', fontSize: '0.78rem' }}>{activeConvoData?.headline}</p>
               </div>
               <div style={{ marginLeft: 'auto' }}>
                 <a href={`/${locale}/session`} className="btn-primary" style={{ padding: '0.5rem 1.1rem', fontSize: '0.8rem', textDecoration: 'none' }}>Start Session →</a>
@@ -85,8 +85,8 @@ export default function MessagesPage() {
             <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {chatHistory.map((msg: any, i: number) => (
                 <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.from === 'Me' ? 'flex-end' : 'flex-start', gap: '0.2rem' }}>
-                  <span style={{ fontSize: '0.72rem', color: '#52525b' }}>{msg.from} · {msg.time}</span>
-                  <div style={{ maxWidth: '70%', padding: '0.7rem 1rem', borderRadius: msg.from === 'Me' ? '1rem 1rem 0.25rem 1rem' : '1rem 1rem 1rem 0.25rem', background: msg.from === 'Me' ? '#09090b' : 'rgba(39,39,42,0.8)', color: '#fafafa', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                  <span style={{ fontSize: '0.72rem', color: '#82847f' }}>{msg.from} · {msg.time}</span>
+                  <div style={{ maxWidth: '70%', padding: '0.7rem 1rem', borderRadius: msg.from === 'Me' ? '1rem 1rem 0.25rem 1rem' : '1rem 1rem 1rem 0.25rem', background: msg.from === 'Me' ? '#715A5A' : '#44444E', border: '1px solid rgba(211,218,217,0.12)', color: '#D3DAD9', fontSize: '0.9rem', lineHeight: 1.6 }}>
                     {msg.text}
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export default function MessagesPage() {
             </div>
 
             {/* Socket.io badge */}
-            <div style={{ padding: '0.5rem 1.5rem', background: 'rgba(255,255,255,0.03)', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', fontSize: '0.75rem', color: '#71717a', textAlign: 'center' }}>
+            <div style={{ padding: '0.5rem 1.5rem', background: 'rgba(55,53,62,0.7)', borderTop: '1px solid rgba(211,218,217,0.08)', borderBottom: '1px solid rgba(211,218,217,0.08)', fontSize: '0.75rem', color: '#a3a69f', textAlign: 'center' }}>
               Real-time messaging powered by Socket.io
             </div>
 

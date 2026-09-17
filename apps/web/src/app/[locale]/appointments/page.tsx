@@ -21,20 +21,20 @@ export default function AppointmentsPage() {
 
   const tabStyle = (t: Tab) => ({
     padding: '0.5rem 1.25rem', borderRadius: '0.6rem', border: 'none', cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600, fontFamily: 'inherit', transition: 'all 0.2s',
-    ...(tab === t ? { background: '#09090b', color: '#ffffff' } : { background: 'transparent', color: '#71717a' }),
+    ...(tab === t ? { background: '#715A5A', color: '#D3DAD9' } : { background: 'transparent', color: '#a3a69f' }),
   });
 
   return (
-    <div style={{ minHeight: '100vh', background: '#09090b', color: '#fafafa' }}>
+    <div style={{ minHeight: '100vh', background: '#37353E', color: '#D3DAD9' }}>
       <Navbar locale={locale} />
       <main style={{ maxWidth: 900, margin: '0 auto', padding: '6rem 1.5rem 4rem' }}>
         <div className="animate-fade-in-up" style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>My Appointments</h1>
-          <p style={{ color: '#71717a', marginTop: '0.4rem' }}>Manage your upcoming and past mentorship sessions.</p>
+          <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em', color: '#D3DAD9' }}>My Appointments</h1>
+          <p style={{ color: '#a3a69f', marginTop: '0.4rem' }}>Manage your upcoming and past mentorship sessions.</p>
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: '0.4rem', background: 'rgba(0,0,0,0.3)', borderRadius: '0.75rem', padding: '4px', width: 'fit-content', marginBottom: '2rem' }}>
+        <div style={{ display: 'flex', gap: '0.4rem', background: '#44444E', borderRadius: '0.75rem', padding: '4px', width: 'fit-content', marginBottom: '2rem', border: '1px solid rgba(211,218,217,0.12)' }}>
           {(['upcoming', 'past', 'canceled'] as Tab[]).map(t => (
             <button key={t} style={tabStyle(t)} onClick={() => setTab(t)}>
               {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -47,18 +47,18 @@ export default function AppointmentsPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {MOCK_UPCOMING.map(s => (
               <div key={s.id} className="glass-panel card-hover" style={{ borderRadius: '1.25rem', padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
-                <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#27272a', border: '1px solid #3f3f46', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1.2rem', color: '#fff', flexShrink: 0 }}>{s.expert.charAt(0)}</div>
+                <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#44444E', border: '1px solid rgba(211,218,217,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1.2rem', color: '#D3DAD9', flexShrink: 0 }}>{s.expert.charAt(0)}</div>
                 <div style={{ flex: 1 }}>
-                  <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.15rem' }}>{s.expert}</p>
-                  <p style={{ color: '#71717a', fontSize: '0.8rem', marginBottom: '0.5rem' }}>{s.headline}</p>
+                  <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.15rem', color: '#D3DAD9' }}>{s.expert}</p>
+                  <p style={{ color: '#a3a69f', fontSize: '0.8rem', marginBottom: '0.5rem' }}>{s.headline}</p>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {s.skills.map(sk => <span key={sk} className="skill-chip">{sk}</span>)}
                   </div>
                 </div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  <p style={{ fontWeight: 700, color: '#fafafa', marginBottom: '0.15rem' }}>{s.day}</p>
-                  <p style={{ color: '#a1a1aa', fontSize: '0.875rem', marginBottom: '0.5rem' }}>{s.time}</p>
-                  <span style={{ fontSize: '0.8rem', color: '#71717a' }}>{s.rate}</span>
+                  <p style={{ fontWeight: 700, color: '#D3DAD9', marginBottom: '0.15rem' }}>{s.day}</p>
+                  <p style={{ color: '#a3a69f', fontSize: '0.875rem', marginBottom: '0.5rem' }}>{s.time}</p>
+                  <span style={{ fontSize: '0.8rem', color: '#82847f' }}>{s.rate}</span>
                 </div>
                 <a href={`/${locale}/session`} className="btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.82rem', textDecoration: 'none', flexShrink: 0 }}>Join →</a>
               </div>
@@ -69,16 +69,16 @@ export default function AppointmentsPage() {
         {tab === 'past' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {MOCK_PAST.map(s => (
-              <div key={s.id} className="glass-panel" style={{ borderRadius: '1.25rem', padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem', opacity: 0.85 }}>
-                <div style={{ width: 52, height: 52, borderRadius: '50%', background: 'linear-gradient(135deg,#3f3f46,#27272a)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1.2rem', color: '#a1a1aa', flexShrink: 0 }}>{s.expert.charAt(0)}</div>
+              <div key={s.id} className="glass-panel" style={{ borderRadius: '1.25rem', padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1.25rem', opacity: 0.9 }}>
+                <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#44444E', border: '1px solid rgba(211,218,217,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1.2rem', color: '#D3DAD9', flexShrink: 0 }}>{s.expert.charAt(0)}</div>
                 <div style={{ flex: 1 }}>
-                  <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.15rem' }}>{s.expert}</p>
-                  <p style={{ color: '#71717a', fontSize: '0.8rem' }}>{s.headline}</p>
+                  <p style={{ fontWeight: 700, fontSize: '1rem', marginBottom: '0.15rem', color: '#D3DAD9' }}>{s.expert}</p>
+                  <p style={{ color: '#a3a69f', fontSize: '0.8rem' }}>{s.headline}</p>
                 </div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  <p style={{ color: '#a1a1aa', fontSize: '0.875rem', marginBottom: '0.15rem' }}>{s.day} · {s.time}</p>
+                  <p style={{ color: '#D3DAD9', fontSize: '0.875rem', marginBottom: '0.15rem' }}>{s.day} · {s.time}</p>
                   {s.rating ? (
-                    <span style={{ color: '#a1a1aa', fontSize: '0.75rem', fontFamily: 'monospace' }}>
+                    <span style={{ color: '#a3a69f', fontSize: '0.75rem', fontFamily: 'monospace' }}>
                       {s.rating}.0 / 5.0
                     </span>
                   ) : null}
@@ -90,9 +90,9 @@ export default function AppointmentsPage() {
 
         {tab === 'canceled' && (
           <div className="glass-panel" style={{ borderRadius: '1.25rem', padding: '3rem', textAlign: 'center' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '1rem', color: '#3f3f46' }}>—</div>
-            <h3 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>No Canceled Sessions</h3>
-            <p style={{ color: '#71717a', fontSize: '0.875rem', marginBottom: '1.5rem' }}>You haven&apos;t canceled any sessions.</p>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem', color: '#715A5A' }}>—</div>
+            <h3 style={{ fontWeight: 700, marginBottom: '0.5rem', color: '#D3DAD9' }}>No Canceled Sessions</h3>
+            <p style={{ color: '#a3a69f', fontSize: '0.875rem', marginBottom: '1.5rem' }}>You haven&apos;t canceled any sessions.</p>
             <a href={`/${locale}/dashboard`} className="btn-primary" style={{ padding: '0.75rem 1.75rem', textDecoration: 'none' }}>Find a Mentor →</a>
           </div>
         )}
